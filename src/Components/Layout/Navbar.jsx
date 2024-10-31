@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ brand, links, bgColor = 'light' }) => {
     return (
-        <nav className={`navbar navbar-expand-lg navbar-${bgColor} bg-${bgColor}`}>
+        <nav className={`navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-${bgColor} bg-${bgColor}`}>
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     {brand}
