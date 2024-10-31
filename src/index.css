@@ -44,3 +44,9 @@ body {
     box-sizing: border-box;
     color: var(--ds-text-subtle, #42526E);
 }
+@media screen and (max-width: 600px) {
+  .custom-card{
+    margin: 6px 0;
+  }
+  
+  }

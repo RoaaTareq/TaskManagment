@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const Card = ({ title, content, image, footer }) => {
     return (
-        <div className="card ">
+        <div className="card custom-card">
             {image && <img src={image} alt={title} className=" icon-card" />} 
             <div className="card-body">
                 <h3 className="card-title">{title}</h3>
-                <p className="card-text">{content}</p> 
+                <p className="card-text text-justify">{content}</p> 
             </div>
             {footer && <div className="card-footer">{footer}</div>} 
         </div>
