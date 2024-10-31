@@ -8,14 +8,16 @@ const Button = ({
     isLoading = false, 
     onClick, 
     children,
+    className // Accepting additional className prop
 }) => {
     
-    const buttonClass = `btn btn-${variant} ${size ? `btn-${size}` : ''}`;
+    // Combine button classes with any additional className
+    const buttonClass = `btn btn-${variant} ${size ? `btn-${size}` : ''} ${className || ''}`.trim();
 
     return (
         <button
             type="button"
-            className={buttonClass}
+            className={buttonClass} // Using the combined class string
             disabled={isDisabled || isLoading}
             onClick={onClick}
         >
@@ -36,6 +38,7 @@ Button.propTypes = {
     isLoading: PropTypes.bool,
     onClick: PropTypes.func,
     children: PropTypes.node.isRequired,
+    className: PropTypes.string, // Adding prop types for className
 };
 
 export default Button;
