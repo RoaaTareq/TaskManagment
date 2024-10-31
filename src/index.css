@@ -8,3 +8,14 @@
 body {
   font-family: 'Nunito' !important;
 }
+
+.icon-card{
+
+    border-color: rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-width: 8px;
+    height: 3rem;
+    width: 3rem;
+    margin: 12px;;
+}

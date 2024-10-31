@@ -1,56 +1,63 @@
+// Home.js
 import React from 'react';
 import TopSection from './TopSection';
 import Features from './OurFeatures';
 import Service from './OurService';
 
-function Home (){
+import folderIcon from '../../assets/icon/Folder.png';
+import leafIcon from '../../assets/icon/leaf.png';
+import megaphoneIcon from '../../assets/icon/megphone.png';
+import integrationImage from '../../assets/images/Gears.svg'
+import Support from '../../assets/images/Search_Value.svg'
+import Smoothy from '../../assets/images/Integrations_Puzzle.svg'
+
+function Home() {
     const servicesData = [
         {
-            title: 'Service 1',
-            content: 'Description of service 1.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 1'
+            title: 'Project Management',
+            content: "Keep tasks in order, deadlines on track, and team members aligned with this system.",
+            image: folderIcon, // Use the imported image
         },
         {
-            title: 'Service 2',
-            content: 'Description of service 2.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 2'
+            title: 'Meetings',
+            content: 'Empower your team meetings to be more productive, empowering, and dare we say—fun.',
+            image: leafIcon, // Use the imported image
         },
         {
-            title: 'Service 3',
-            content: 'Description of service 3.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 3'
+            title: 'Task management',
+            content: 'Use System to track, manage, complete, and bring tasks like the pieces of a puzzle, success every time.',
+            image: megaphoneIcon, // Use the imported image
         }
     ];
+
     const featuresData = [
         {
-            title: 'Service 1',
-            content: 'Description of service 1.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 1'
+            title: 'Integrations',
+            content: 'Connect the apps already uses into your system workflow or add a Power-Up to fine-tune your specific needs.',
+            image: integrationImage,
+          
         },
         {
-            title: 'Service 2',
-            content: 'Description of service 2.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 2'
+            title: '24/7 Support',
+            content: 'No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.',
+            image: Support,
+          
         },
         {
-            title: 'Service 3',
-            content: 'Description of service 3.',
-            image: 'https://via.placeholder.com/150',
-            footer: 'Footer content for service 3'
+            title: 'Esay to use',
+            content: 'The productivity tool teams love, paired with the features and security needed for scale.',
+            image: Smoothy,
+           
         }
     ];
-    return(
-       <>
-       <TopSection/>
-       <Service services={servicesData}/>
-       <Features features={featuresData}/>
-       </>
-    )
+
+    return (
+        <>
+            <TopSection />
+            <Service services={servicesData} />
+            <Features features={featuresData} />
+        </>
+    );
 }
 
-export default Home ;
+export default Home;
