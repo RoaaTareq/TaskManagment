@@ -4,12 +4,12 @@ import Navbar from '../../components/Layout/Navbar';
 const MainNavbar = () => { 
     const navLinks = [
         { label: 'Home', href: '/' },
-        // { label: 'About', href: '/about' },
-        // { label: 'Contact', href: '/contact' },
+        { label: 'Login', href: '/sign-in' },
+        { label: 'Register', href: '/sign-up' },
     ];
 
     return (
-        <Navbar brand="TaskManament" links={navLinks} bgColor="light" />
+        <Navbar brand="Task Managment " links={navLinks} bgColor="light" />
     );
 }
 

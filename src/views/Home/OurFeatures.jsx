@@ -1,14 +1,24 @@
 import React from 'react';
-
-function Features(){
+import Card from '../../components/Card/Card'; 
+import style from '../../assets/style/feature.module.css'
+function Features({features}){
     return(
-        <section>
-            <div className="container">
-                <div className="row">
-                    <div className="col-6"></div>
-                    <div className="col-6"></div>
-                </div>
+        <section className={style.features}>
+           <div className="container">
+           <h2 className="text-center">Our Features</h2>
+            <div className="row">
+                {features.map((feature, index) => (
+                    <div className="col-md-4" key={index}> 
+                        <Card 
+                            title={feature.title}
+                            content={feature.content}
+                            image={feature.image}
+                          
+                        />
+                    </div>
+                ))}
             </div>
+           </div>
         </section>
     )
 }
