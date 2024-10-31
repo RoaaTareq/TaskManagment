@@ -59,12 +59,16 @@ const Column = ({ title, tasks, moveTask, columnId }) => {
     return (
         <div
             ref={drop}
-            className="col-4"
+            className="col-3"
             style={{
-                minHeight: '200px',
+                minHeight: '100vh',
                 border: `2px solid ${borderColor}`,
                 padding: '10px',
                 backgroundColor: 'white', // Optional: Set background color for better contrast
+                width:'30%',
+                margin:'12px',
+                borderRadius:'12px'
+
             }}
         >
             <h5>{title}</h5>
