@@ -28,17 +28,17 @@ const Login = () => {
             try {
                 const user = await getUserByEmailAndPassword(values.email, values.password);
                 if (user) {
-                    // Store user data in localStorage
+                   
                     localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
-                    navigate('/dashboard'); // Redirect to dashboard if user is found
+                    navigate('/dashboard'); 
                 } else {
                     setErrors({ api: 'Invalid email or password' });
                 }
             } catch (error) {
-                console.error('Login error:', error);
+               
                 setErrors({ api: 'Login failed' });
             } finally {
-                setSubmitting(false); // Set submitting to false regardless of the result
+                setSubmitting(false);
             }
         },
     });
@@ -71,8 +71,8 @@ const Login = () => {
                             type="password"
                             name="password"
                             value={formik.values.password}
-                            onChange={formik.handleChange} // Handle password input
-                            onBlur={formik.handleBlur} // Handle blur for validation
+                            onChange={formik.handleChange} 
+                            onBlur={formik.handleBlur} 
                             placeholder="Enter your password"
                         />
                         {formik.touched.password && formik.errors.password && (

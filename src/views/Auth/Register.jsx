@@ -23,13 +23,12 @@ const RegisterForm = () => {
                 .required('Password is required'),
         }),
         onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
-            console.log('Form data ready to store:', values);
-
+           
             try {
                 const id = await addUser(values); 
                 if (id) {
                   
-                    resetForm(); // Reset the form
+                    resetForm(); 
                 }
             } catch (error) {
                 setErrors({ api: 'Registration failed. Please try again.' });
