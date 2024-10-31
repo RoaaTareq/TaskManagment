@@ -1,35 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Footer.css';
 
-/**
- * A reusable footer component with customizable content.
- * @param {string} copyright - The copyright text.
- * @param {array} links - An array of link objects for navigation.
- * @param {array} socialLinks - An array of social media link objects.
- * @returns A styled footer component.
- */
+
+
 const Footer = ({ copyright, links, socialLinks }) => {
     return (
-        <footer className="footer">
-            <div className="footer-content">
-                <div className="footer-links">
-                    {links && links.map((link, index) => (
-                        <a key={index} href={link.href} className="footer-link">
-                            {link.label}
-                        </a>
-                    ))}
+        <footer className="bg-dark text-light py-4">
+            <div className="container">
+                <div className="d-flex justify-content-between mb-3">
+                    <div className="footer-links">
+                        {links && links.map((link, index) => (
+                            <a key={index} href={link.href} className="text-light me-3">
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                    <div className="footer-social-links">
+                        {socialLinks && socialLinks.map((link, index) => (
+                            <a
+                                key={index}
+                                href={link.href}
+                                className="me-3 text-light"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img src={link.icon} alt={link.label} className="social-icon" style={{ width: '24px', height: '24px' }} />
+                            </a>
+                        ))}
+                    </div>
                 </div>
-                <div className="footer-social-links">
-                    {socialLinks && socialLinks.map((link, index) => (
-                        <a key={index} href={link.href} className="footer-social-link" target="_blank" rel="noopener noreferrer">
-                            <img src={link.icon} alt={link.label} className="social-icon" />
-                        </a>
-                    ))}
+                <div className="text-center">
+                    <p className="mb-0">{copyright}</p>
                 </div>
-            </div>
-            <div className="footer-copyright">
-                <p>{copyright}</p>
             </div>
         </footer>
     );
@@ -37,7 +39,7 @@ const Footer = ({ copyright, links, socialLinks }) => {
 
 // Define prop types for the footer component
 Footer.propTypes = {
-    copyright: PropTypes.string,
+    copyright: PropTypes.string.isRequired,
     links: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string.isRequired,
