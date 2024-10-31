@@ -22,7 +22,7 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-auto"> {/* Align links to the right */}
+                    <ul className="navbar-nav ms-auto align-items-center"> {/* Align links to the right */}
                         {links.map((link, index) => (
                             <li className="nav-item" key={index}>
                                 {link.onClick ? (
