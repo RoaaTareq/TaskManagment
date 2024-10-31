@@ -12,6 +12,10 @@ body {
   color:red;
 }
 
+.footer-bg,.sidebar-bg{
+  background: linear-gradient(60deg, rgb(82, 67, 170), rgb(6 8 110));
+  
+}
 .icon-card{
 
     border-color: rgb(255, 255, 255);
@@ -44,9 +48,37 @@ body {
     box-sizing: border-box;
     color: var(--ds-text-subtle, #42526E);
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
   .custom-card{
     margin: 6px 0;
   }
   
   }
+
+  /* Sidebar.css */
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar .top {
+  
+  padding-bottom: 10px;
+}
+
+.sidebar .brand span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sidebar .nav-link {
+  color: #343a40;
+  padding: 10px;
+}
+
+.sidebar .nav-link:hover {
+  color: #007bff;
+}

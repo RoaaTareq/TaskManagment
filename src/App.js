@@ -6,6 +6,7 @@ import MainFooter from './views/Layout/MainFooter';
 import Register from './views/Auth/Register';
 import Login from './views/Auth/Login';
 import Dashboard from './views/Dashboard/Dashboard';
+import MainSidebar from './views/Dashboard/Layout/MainSidebar';
 
 function App() {
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -19,7 +20,7 @@ function App() {
         <Route path="/sign-in" element={ <Login />} />
         <Route
           path="/dashboard/*"
-          element={loggedInUser ? <Dashboard /> : <Navigate to="/dashboard" />}
+          element={loggedInUser ? <MainSidebar /> : <Navigate to="/dashboard/*" />}
         />
       </Routes>
       <MainFooter />

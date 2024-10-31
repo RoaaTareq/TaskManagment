@@ -12,7 +12,7 @@ const Input = ({
     return (
         <input
             type={type}
-            className="form-control" 
+            className="form-control mt-2 mb-2" 
             placeholder={placeholder}
             value={value}
             name={name} // Add the name attribute here

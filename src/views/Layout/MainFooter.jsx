@@ -8,7 +8,7 @@ const MainFooter = () => {
 
     return (
        
-                <Footer copyright="© 2024 MyWebsite"  />
+                <Footer copyright="2024 © Copyright Task Mangement System"  />
           
     );
 };

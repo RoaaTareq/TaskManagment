@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Footer = ({ copyright, links, socialLinks }) => {
     return (
-        <footer className="bg-dark text-light py-4">
+        <footer className="footer-bg text-light py-2">
             <div className="container">
                 <div className="d-flex justify-content-between mb-3">
                     <div className="footer-links">
