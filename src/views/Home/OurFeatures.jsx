@@ -13,6 +13,7 @@ function Features({features}){
                             title={feature.title}
                             content={feature.content}
                             image={feature.image}
+                            
                           
                         />
                     </div>

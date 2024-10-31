@@ -3,3 +3,9 @@
     padding: 120px;
    
 }
+
+@media screen and (max-width: 600px) {
+.Main_section{
+    padding: 30px;
+}
+}

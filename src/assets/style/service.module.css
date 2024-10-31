@@ -2,3 +2,10 @@
     padding: 80px;
 }
 
+@media screen and (max-width: 600px) {
+    .service{
+        padding: 20px;
+       
+    }
+    
+    }
