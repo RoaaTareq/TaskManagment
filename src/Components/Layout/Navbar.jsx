@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ brand, links, bgColor = 'light' }) => {
     return (
@@ -26,9 +25,19 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
                     <ul className="navbar-nav ms-auto"> {/* Align links to the right */}
                         {links.map((link, index) => (
                             <li className="nav-item" key={index}>
-                                <Link className="nav-link" to={link.href}>
-                                    {link.label}
-                                </Link>
+                                {link.onClick ? (
+                                    <button
+                                        onClick={link.onClick}
+                                        className="nav-link btn btn-link"
+                                        style={{ padding: 0, border: 'none', background: 'none', color: 'inherit' }}
+                                    >
+                                        {link.label}
+                                    </button>
+                                ) : (
+                                    <Link className="nav-link" to={link.href}>
+                                        {link.label}
+                                    </Link>
+                                )}
                             </li>
                         ))}
                     </ul>
@@ -38,13 +47,13 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
     );
 };
 
-
 Navbar.propTypes = {
     brand: PropTypes.string.isRequired,
     links: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string.isRequired,
-            href: PropTypes.string.isRequired,
+            href: PropTypes.string,
+            onClick: PropTypes.func // Allow for optional onClick function
         })
     ).isRequired,
     bgColor: PropTypes.oneOf(['light', 'dark']),

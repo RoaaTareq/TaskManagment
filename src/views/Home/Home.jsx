@@ -3,6 +3,7 @@ import React from 'react';
 import TopSection from './TopSection';
 import Features from './OurFeatures';
 import Service from './OurService';
+import Banner from './Banner';
 
 import folderIcon from '../../assets/icon/Folder.png';
 import leafIcon from '../../assets/icon/leaf.png';
@@ -55,6 +56,7 @@ function Home() {
         <>
             <TopSection />
             <Service services={servicesData} />
+            <Banner/>
             <Features features={featuresData} />
         </>
     );
