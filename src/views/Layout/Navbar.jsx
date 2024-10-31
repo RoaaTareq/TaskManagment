@@ -1,25 +1,16 @@
 import React from 'react';
+import Navbar from '../../components/Layout/Navbar'; 
 
-function Navbar(){
-    return(
-        <div>
-        <nav>
-          <ul className="nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
+const MainNavbar = () => { 
+    const navLinks = [
+        { label: 'Home', href: '/' },
+        // { label: 'About', href: '/about' },
+        // { label: 'Contact', href: '/contact' },
+    ];
 
-        
-      </div>
-    )
+    return (
+        <Navbar brand="TaskManament" links={navLinks} bgColor="light" />
+    );
 }
 
-export default Navbar
+export default MainNavbar;

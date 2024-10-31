@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-
 const Footer = ({ copyright, links, socialLinks }) => {
     return (
         <footer className="bg-dark text-light py-4">
