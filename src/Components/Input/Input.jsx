@@ -1,13 +1,12 @@
+// Input.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-
 
 const Input = ({
     type = 'text', 
     placeholder = '',
     value,
-    isDisabled = false,
+    name, // Add the name prop
     onChange,
 }) => {
     return (
@@ -16,7 +15,7 @@ const Input = ({
             className="form-control" 
             placeholder={placeholder}
             value={value}
-            disabled={isDisabled}
+            name={name} // Add the name attribute here
             onChange={onChange}
         />
     );
@@ -27,7 +26,7 @@ Input.propTypes = {
     type: PropTypes.string,
     placeholder: PropTypes.string,
     value: PropTypes.string.isRequired,
-    isDisabled: PropTypes.bool,
+    name: PropTypes.string.isRequired, // Ensure it's defined in prop types
     onChange: PropTypes.func.isRequired,
 };
 

@@ -1,3 +1,4 @@
+// Button.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,7 +17,7 @@ const Button = ({
 
     return (
         <button
-            type="button"
+            type="submit" // Change type to "submit"
             className={buttonClass} // Using the combined class string
             disabled={isDisabled || isLoading}
             onClick={onClick}

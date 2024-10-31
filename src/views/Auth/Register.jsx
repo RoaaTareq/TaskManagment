@@ -1,6 +1,8 @@
 // RegisterForm.js
 import React, { useState } from 'react';
-import { addUser } from '../../db';
+import { addUser } from '../../db'; // Adjust the path as necessary
+import Input from '../../components/Input/Input'; // Adjust the path as necessary
+import Button from '../../components/Button/Button'; // Adjust the path as necessary
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -16,7 +18,7 @@ const RegisterForm = () => {
         else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return Object.keys(newErrors).length === 0; // Return true if there are no errors
     };
 
     const handleChange = (e) => {
@@ -32,67 +34,71 @@ const RegisterForm = () => {
             console.log('Form data ready to store:', formData);
 
             try {
-                const id = await addUser(formData); // Check if unique ID is returned
+                const id = await addUser(formData); // Ensure a unique ID is returned
                 if (id) {
                     setSuccess(true);
                     console.log('User successfully stored with ID:', id);
-                    setFormData({ name: '', email: '', password: '' });
-                    setErrors({});
+                    setTimeout(() => {
+                        setFormData({ name: '', email: '', password: '' });
+                        setErrors({});
+                    }, 2000); // Clear form after 2 seconds
                 }
             } catch (error) {
+                setErrors({ api: 'Registration failed. Please try again.' });
                 console.error('Error in form submission:', error);
             }
         }
     };
 
     return (
-      <section className='register-section'>
-          <div  className='container'>
-            <h2>Register</h2>
-            {success && <p >Registration successful!</p>}
-            <form onSubmit={handleSubmit} className='register-form'noValidate>
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                    {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-                </div>
+        <section className='register-section'>
+            <div className='container'>
+                <h2>Register</h2>
+                {success && <p className='alert alert-success'>Registration successful!</p>}
+                {errors.api && <p className='alert alert-danger'>{errors.api}</p>}
+                <form onSubmit={handleSubmit} className='register-form' noValidate>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label>Name:</label>
+                        <Input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange} // Use handleChange
+                            placeholder="Enter your name"
+                        />
+                        {errors.name && <p className='alert-text'>{errors.name}</p>}
+                    </div>
 
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                    {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-                </div>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label>Email:</label>
+                        <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange} // Use handleChange
+                            placeholder="Enter your email"
+                        />
+                        {errors.email && <p className='alert-text'>{errors.email}</p>}
+                    </div>
 
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        style={{ width: '100%', padding: '8px' }}
-                    />
-                    {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
-                </div>
+                    <div style={{ marginBottom: '15px' }}>
+                        <label>Password:</label>
+                        <Input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange} // Use handleChange
+                            placeholder="Enter your password"
+                        />
+                        {errors.password && <p className='alert-text'>{errors.password}</p>}
+                    </div>
 
-                <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#4CAF50', color: '#fff', border: 'none', cursor: 'pointer' }}>
-                    Register
-                </button>
-            </form>
-        </div>
-      </section>
+                    <Button type="submit" variant="success">
+                        Register
+                    </Button>
+                </form>
+            </div>
+        </section>
     );
 };
 

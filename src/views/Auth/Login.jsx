@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
+import Input from '../../components/Input/Input'; // Import Input component
+import Button from '../../components/Button/Button'; // Import Button component
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -35,38 +37,29 @@ const Login = () => {
             <form onSubmit={handleLogin} noValidate className='login-form'>
                 <div style={{ marginBottom: '15px' }}>
                     <label>Email:</label>
-                    <input
+                    <Input
                         type="email"
                         name="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        style={{ width: '100%', padding: '8px' }}
+                        onChange={(e) => setEmail(e.target.value)} // Handle email input
+                        placeholder="Enter your email"
                     />
                 </div>
 
                 <div style={{ marginBottom: '15px' }}>
                     <label>Password:</label>
-                    <input
+                    <Input
                         type="password"
                         name="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        style={{ width: '100%', padding: '8px' }}
+                        onChange={(e) => setPassword(e.target.value)} // Handle password input
+                        placeholder="Enter your password"
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#4CAF50',
-                        color: '#fff',
-                        border: 'none',
-                        cursor: 'pointer'
-                    }}
-                >
+                <Button type="submit" variant="success">
                     Login
-                </button>
+                </Button>
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
