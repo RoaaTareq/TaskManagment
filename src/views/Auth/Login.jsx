@@ -1,70 +1,91 @@
-// Login.js
-import React, { useState } from 'react';
+
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input'; // Import Input component
 import Button from '../../components/Button/Button'; // Import Button component
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setError(null);
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup.string()
+                .email('Invalid email address')
+                .required('Email is required'),
+            password: Yup.string()
+                .required('Password is required'),
+        }),
+        onSubmit: async (values, { setSubmitting, setErrors }) => {
+            setErrors({}); // Clear previous errors
 
-        try {
-            const user = await getUserByEmailAndPassword(email, password);
-            if (user) {
-                // Store user data in localStorage
-                localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
-                navigate('/dashboard');  // Redirect to dashboard if user is found
-            } else {
-                setError('Invalid email or password');
+            try {
+                const user = await getUserByEmailAndPassword(values.email, values.password);
+                if (user) {
+                    // Store user data in localStorage
+                    localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
+                    navigate('/dashboard'); // Redirect to dashboard if user is found
+                } else {
+                    setErrors({ api: 'Invalid email or password' });
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                setErrors({ api: 'Login failed' });
+            } finally {
+                setSubmitting(false); // Set submitting to false regardless of the result
             }
-        } catch (error) {
-            console.error('Login error:', error);
-            setError('Login failed');
-        }
-    };
+        },
+    });
 
     return (
-       <section className='login-section'>
-         <div className='container'>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin} noValidate className='login-form'>
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Email:</label>
-                    <Input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} // Handle email input
-                        placeholder="Enter your email"
-                    />
-                </div>
+        <section className='login-section'>
+            <div className='container'>
+               
+                {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
+                <form onSubmit={formik.handleSubmit} noValidate className='login-form'>
+                    <h3 className='text-center'>Log in to continue</h3>
+                    <div >
+                        <label>Email:</label>
+                        <Input
+                            type="email"
+                            name="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange} // Handle email input
+                            onBlur={formik.handleBlur} // Handle blur for validation
+                            placeholder="Enter your email"
+                        />
+                        {formik.touched.email && formik.errors.email && (
+                            <p className='alert-text'>{formik.errors.email}</p>
+                        )}
+                    </div>
 
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Password:</label>
-                    <Input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)} // Handle password input
-                        placeholder="Enter your password"
-                    />
-                </div>
+                    <div >
+                        <label>Password:</label>
+                        <Input
+                            type="password"
+                            name="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange} // Handle password input
+                            onBlur={formik.handleBlur} // Handle blur for validation
+                            placeholder="Enter your password"
+                        />
+                        {formik.touched.password && formik.errors.password && (
+                            <p className='alert-text'>{formik.errors.password}</p>
+                        )}
+                    </div>
 
-                <Button type="submit" variant="success">
-                    Login
-                </Button>
-
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
-        </div>
-       </section>
+                    <Button type="submit"  disabled={formik.isSubmitting}>
+                        Login
+                    </Button>
+                </form>
+            </div>
+        </section>
     );
 };
 

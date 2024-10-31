@@ -1,99 +1,98 @@
 // RegisterForm.js
-import React, { useState } from 'react';
-import { addUser } from '../../db'; // Adjust the path as necessary
-import Input from '../../components/Input/Input'; // Adjust the path as necessary
-import Button from '../../components/Button/Button'; // Adjust the path as necessary
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { addUser } from '../../db'; 
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button'; 
 
 const RegisterForm = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-    const [errors, setErrors] = useState({});
-    const [success, setSuccess] = useState(false);
-
-    const validate = () => {
-        const newErrors = {};
-        if (!formData.name) newErrors.name = 'Name is required';
-        if (!formData.email) newErrors.email = 'Email is required';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-        if (!formData.password) newErrors.password = 'Password is required';
-        else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; // Return true if there are no errors
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setSuccess(false);
-
-        if (validate()) {
-            console.log('Form data ready to store:', formData);
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            password: '',
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Name is required'),
+            email: Yup.string()
+                .email('Invalid email address')
+                .required('Email is required'),
+            password: Yup.string()
+                .min(6, 'Password must be at least 6 characters')
+                .required('Password is required'),
+        }),
+        onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
+            console.log('Form data ready to store:', values);
 
             try {
-                const id = await addUser(formData); // Ensure a unique ID is returned
+                const id = await addUser(values); 
                 if (id) {
-                    setSuccess(true);
-                    console.log('User successfully stored with ID:', id);
-                    setTimeout(() => {
-                        setFormData({ name: '', email: '', password: '' });
-                        setErrors({});
-                    }, 2000); // Clear form after 2 seconds
+                  
+                    resetForm(); // Reset the form
                 }
             } catch (error) {
                 setErrors({ api: 'Registration failed. Please try again.' });
-                console.error('Error in form submission:', error);
+                
+            } finally {
+                setSubmitting(false);
             }
-        }
-    };
+        },
+    });
 
     return (
         <section className='register-section'>
             <div className='container'>
-                <h2>Register</h2>
-                {success && <p className='alert alert-success'>Registration successful!</p>}
-                {errors.api && <p className='alert alert-danger'>{errors.api}</p>}
-                <form onSubmit={handleSubmit} className='register-form' noValidate>
-                    <div style={{ marginBottom: '15px' }}>
+               
+                {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
+                <form onSubmit={formik.handleSubmit} className='register-form' noValidate>
+                <h3 className='text-center'>Register in to use system</h3>
+                    <div>
                         <label>Name:</label>
                         <Input
                             type="text"
                             name="name"
-                            value={formData.name}
-                            onChange={handleChange} // Use handleChange
+                            value={formik.values.name}
+                            onChange={formik.handleChange} 
+                            onBlur={formik.handleBlur} 
                             placeholder="Enter your name"
                         />
-                        {errors.name && <p className='alert-text'>{errors.name}</p>}
+                        {formik.touched.name && formik.errors.name && (
+                            <p className='alert-text'>{formik.errors.name}</p>
+                        )}
                     </div>
 
-                    <div style={{ marginBottom: '15px' }}>
+                    <div >
                         <label>Email:</label>
                         <Input
                             type="email"
                             name="email"
-                            value={formData.email}
-                            onChange={handleChange} // Use handleChange
+                            value={formik.values.email}
+                            onChange={formik.handleChange} 
+                            onBlur={formik.handleBlur} 
                             placeholder="Enter your email"
                         />
-                        {errors.email && <p className='alert-text'>{errors.email}</p>}
+                        {formik.touched.email && formik.errors.email && (
+                            <p className='alert-text'>{formik.errors.email}</p>
+                        )}
                     </div>
 
-                    <div style={{ marginBottom: '15px' }}>
+                    <div >
                         <label>Password:</label>
                         <Input
                             type="password"
                             name="password"
-                            value={formData.password}
-                            onChange={handleChange} // Use handleChange
+                            value={formik.values.password}
+                            onChange={formik.handleChange} 
+                            onBlur={formik.handleBlur} 
                             placeholder="Enter your password"
                         />
-                        {errors.password && <p className='alert-text'>{errors.password}</p>}
+                        {formik.touched.password && formik.errors.password && (
+                            <p className='alert-text'>{formik.errors.password}</p>
+                        )}
                     </div>
 
-                    <Button type="submit" variant="success">
+                    <Button type="submit"  disabled={formik.isSubmitting}>
                         Register
                     </Button>
                 </form>
