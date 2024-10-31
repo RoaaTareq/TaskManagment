@@ -46,10 +46,11 @@ const RegisterForm = () => {
     };
 
     return (
-        <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <section className='register-section'>
+          <div  className='container'>
             <h2>Register</h2>
-            {success && <p style={{ color: 'green' }}>Registration successful!</p>}
-            <form onSubmit={handleSubmit} noValidate>
+            {success && <p >Registration successful!</p>}
+            <form onSubmit={handleSubmit} className='register-form'noValidate>
                 <div style={{ marginBottom: '15px' }}>
                     <label>Name:</label>
                     <input
@@ -91,6 +92,7 @@ const RegisterForm = () => {
                 </button>
             </form>
         </div>
+      </section>
     );
 };
 

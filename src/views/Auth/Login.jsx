@@ -29,9 +29,10 @@ const Login = () => {
     };
 
     return (
-        <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+       <section className='login-section'>
+         <div className='container'>
             <h2>Login</h2>
-            <form onSubmit={handleLogin} noValidate>
+            <form onSubmit={handleLogin} noValidate className='login-form'>
                 <div style={{ marginBottom: '15px' }}>
                     <label>Email:</label>
                     <input
@@ -70,6 +71,7 @@ const Login = () => {
                 {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
         </div>
+       </section>
     );
 };
 

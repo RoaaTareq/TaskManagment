@@ -19,3 +19,27 @@ body {
     width: 3rem;
     margin: 12px;;
 }
+.login-section,.register-section{
+  min-height: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin: 50px 0px;
+}
+.login-form,.register-form{
+  display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    justify-content: center;
+    width: 400px;
+    height: 500px;
+    padding: 32px 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+    box-sizing: border-box;
+    color: var(--ds-text-subtle, #42526E);
+}
+
+
