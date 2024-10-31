@@ -44,14 +44,3 @@ body {
     box-sizing: border-box;
     color: var(--ds-text-subtle, #42526E);
 }
-.ratio-16x9 {
-  --bs-aspect-ratio: unset !important
-}
-
-.ratio > * {
-  position:unset !important;
-  top: 0;
-  left: 0;
-  width: unset;
-  height: unset;
-}

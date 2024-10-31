@@ -20,13 +20,13 @@ function Home() {
             image: folderIcon, // Use the imported image
         },
         {
-            title: 'Meetings',
-            content: 'Empower your team meetings to be more productive, empowering, and dare we say—fun.',
+            title: 'Meetings with Team',
+            content: "Keep tasks in order, deadlines on track, and team members aligned with this system.",
             image: leafIcon, // Use the imported image
         },
         {
             title: 'Task management',
-            content: 'Use System to track, manage, complete, and bring tasks like the pieces of a puzzle, success every time.',
+            content: "Keep tasks in order, deadlines on track, and team members aligned with this system.",
             image: megaphoneIcon, // Use the imported image
         }
     ];
@@ -46,7 +46,7 @@ function Home() {
         },
         {
             title: 'Esay to use',
-            content: 'The productivity tool teams love, paired with the features and security needed for scale.',
+            content: 'No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.',
             image: Smoothy,
            
         }

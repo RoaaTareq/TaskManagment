@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Card = ({ title, content, image, footer }) => {
     return (
-        <div className="card  ratio ratio-16x9">
+        <div className="card ">
             {image && <img src={image} alt={title} className=" icon-card" />} 
             <div className="card-body">
                 <h3 className="card-title">{title}</h3>

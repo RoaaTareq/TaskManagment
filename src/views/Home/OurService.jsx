@@ -7,7 +7,7 @@ const Service = ({ services }) => {
         <section className={style.service}>
            <div className="container">
            <h2 className="text-center">Our Services</h2>
-            <div className="row">
+            <div className="row  d-flex">
                 {services.map((service, index) => (
                     <div className="col-md-4" key={index}> {/* Use col-md-4 for three cards on medium screens */}
                         <Card 

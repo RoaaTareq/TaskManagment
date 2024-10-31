@@ -6,7 +6,7 @@ function Features({features}){
         <section className={style.features}>
            <div className="container">
            <h2 className="text-center">Our Features</h2>
-            <div className="row">
+            <div className="row  d-flex">
                 {features.map((feature, index) => (
                     <div className="col-md-4" key={index}> 
                         <Card 
