@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype') !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'Nunito' !important;
+    scroll-behavior: smooth;
+  }
+  .alert-text{
+    color:red;
+  }
+  
+  .footer-bg,.sidebar-bg{
+    background: linear-gradient(60deg, rgb(82, 67, 170), rgb(6 8 110));
+    
+  }
+  .icon-card{
+  
+      border-color: rgb(255, 255, 255);
+      border-radius: 0.5rem;
+      border-style: solid;
+      border-width: 8px;
+      height: 3rem !important;
+      width: 3rem !important;
+      margin: 12px;;
+  }
+  .login-section,.register-section{
+    min-height: calc(100% - 100px);
+      display: flex;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      justify-content: center;
+      margin: 50px 0px;
+  }
+  .task-form{
+    position: absolute;
+      margin: auto;
+     
+   
+      transform: translate(60%, 0%);
+      display: flex;
+      flex-direction: column;
+      margin: 0px auto;
+      justify-content: center;
+      width: 500px;
+     
+      padding:  40px;
+      background: rgb(255, 255, 255);
+      border-radius: 12px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      box-sizing: border-box;
+      color: var(--ds-text-subtle, #42526E);
+  }
+  .login-form,.register-form{
+    display: flex;
+      flex-direction: column;
+      margin: 0px auto;
+      justify-content: center;
+      width: 400px;
+      height: 500px;
+      padding: 32px 40px;
+      background: rgb(255, 255, 255);
+      border-radius: 3px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      box-sizing: border-box;
+      color: var(--ds-text-subtle, #42526E);
+  }
+  @media screen and (max-width: 767px) {
+    .custom-card{
+      margin: 6px 0;
+    }
+    
+    }
+  
+    /* Sidebar.css */
+  .sidebar {
+    min-height: 100vh;
+    width: 250px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .sidebar .top {
+    
+    padding-bottom: 10px;
+  }
+  
+  .sidebar .brand span {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .sidebar .nav-link {
+    color: #343a40;
+    padding: 10px;
+  }
+  
+  .sidebar .nav-link:hover {
+    color: #007bff;
+  }
+  .drag-card{
+    padding: 10px;
+      margin: 5px 0px;
+      background-color: #e3e1ee;
+      cursor: move;
+      height: 187px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 5px hsla(220, 6%, 90%, .66), 0 0 8px rgba(228, 231, 236, .3);
+      border-radius: 14px;
+  }
+  
+  .board-layout{
+    border:2px dashed grey;
+    margin: 6px;
+    border-radius: 12px;
+    
+    min-height: 100vh;
+  }
+  .label-form{
+    width: 100px;
+  }
+  .task-edit{
+    position: absolute;
+    top:10px;
+    transform: translate(60%, 20%);
+    display: flex;
+      flex-direction: column;
+      margin: 0px auto;
+      justify-content: center;
+      width: 400px;
+      height: 500px;
+      padding: 32px 40px;
+      background: rgb(255, 255, 255);
+      border-radius: 3px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      box-sizing: border-box;
+      color: var(--ds-text-subtle, #42526E);
+  }
+  
+  .reason-section{
+    padding: 80px;
+    background: linear-gradient(rgb(222, 235, 255), rgb(255, 255, 255)) no-repeat;
+  }
+  .manage-section{
+    padding: 80px;
+  }
+  
+  
+  /* Reson.css */
+  .circular-animation {
+    animation: rotate 10s linear infinite; /* Adjust duration and type of animation as needed */
+    display: block; /* Ensures the image behaves as a block element */
+    margin: 0 auto; /* Centers the image horizontally */
+  }
+  
+  @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+  
