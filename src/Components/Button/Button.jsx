@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button as BootstrapButton, Spinner } from 'react-bootstrap';
 
 const Button = ({
-    variant = 'primary',
+    variant ,
     size, 
     isDisabled = false, 
     isLoading = false, 
