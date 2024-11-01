@@ -2,7 +2,7 @@ import React from 'react';
 import Select from '../../../../components/DropDown/Select'; 
 import Input from '../../../../components/Input/Input'; 
 
-const Filter = ({ setFilterPriority, setStartDate, setEndDate,startDate, endDate }) => {
+const Filter = ({ setFilterPriority, setStartDate, setEndDate, startDate, endDate }) => {
     const handlePriorityChange = (priority) => {
         setFilterPriority(priority); // Set the priority filter based on button click
     };
@@ -11,12 +11,12 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate,startDate, endDate
         <section>
             <div className='container'>
                 <div className='row align-items-center'>
-                    <div className='col-3'>
-                        <div className="d-flex align-items-center">
-                            <button onClick={() => handlePriorityChange('high')}>High</button>
-                            <button onClick={() => handlePriorityChange('medium')}>Medium</button>
-                            <button onClick={() => handlePriorityChange('low')}>Low</button>
-                            <button onClick={() => handlePriorityChange('')}>All</button> {/* Add an "All" button to reset */}
+                    <div className='col-6'>
+                        <div className="d-flex align-items-center mt-4 mb-4">
+                            <button className='filter-btn' onClick={() => handlePriorityChange('high')}>High</button>
+                            <button className='filter-btn' onClick={() => handlePriorityChange('medium')}>Medium</button>
+                            <button className='filter-btn' onClick={() => handlePriorityChange('low')}>Low</button>
+                            <button className='filter-btn' onClick={() => handlePriorityChange('')}>All</button>
                         </div>
                     </div>
                     <div className='col-3'>

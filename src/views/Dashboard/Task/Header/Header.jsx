@@ -52,9 +52,9 @@ const TaskHeader = () => {
     return (
         <section>
             <div className="container">
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between mt-4 mb-4">
                     <h1>Task Management</h1>
-                    <Button onClick={toggleForm}>Create Task +</Button>
+                    <Button className='create-task'onClick={toggleForm}>Create Task +</Button>
                 </div>
                 
                 {loading && <p>Loading tasks...</p>}

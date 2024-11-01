@@ -5,10 +5,12 @@ import { deleteTaskFromDB } from '../../../../db';
 import Filter from '../FilterandSorting/Filter';
 import EditTaskForm from '../Models/Edittask';
 
+// Define item types for dragging
 const ItemTypes = {
     TASK: 'task',
 };
 
+// Task component for individual tasks
 const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
     const [{ isDragging }, drag] = useDrag({
         type: ItemTypes.TASK,
@@ -20,24 +22,22 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
 
     return (
         <div ref={drag} className='drag-card' style={{ opacity: isDragging ? 0.5 : 1 }}>
-              <div className="task-actions d-flex justify-content-end">
-                    <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
-                    <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
-                </div>
+            <div className="task-actions d-flex justify-content-end">
+                <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
+                <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
+            </div>
             <div className="d-flex justify-content-between align-items-center">
-            
-              <div className='d-flex flex-column'>
-                <span>{task.priority}</span>
-                <p>  {task.description} 
-                </p>
-                <span>{task.startDate} to {task.endDate}</span>
-              </div>
-            
+                <div className='d-flex flex-column'>
+                    <span>{task.priority}</span>
+                    <p>{task.description}</p>
+                    <span>{task.startDate} to {task.endDate}</span>
+                </div>
             </div>
         </div>
     );
 };
 
+// Column component to hold tasks
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
         accept: ItemTypes.TASK,
@@ -64,6 +64,7 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     );
 };
 
+// Main Board component
 const Board = ({ tasks, setTasks }) => {
     const [filterPriority, setFilterPriority] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -103,7 +104,7 @@ const Board = ({ tasks, setTasks }) => {
             return; // Early return if there's no current task
         }
 
-        // Updating task in state
+        // Update task in state
         setTasks((prevTasks) => {
             const currentColumnTasks = prevTasks[currentTask.columnId] || [];
             const updatedTasks = currentColumnTasks.map((task) =>
@@ -121,12 +122,13 @@ const Board = ({ tasks, setTasks }) => {
         setCurrentTask(null);
     };
 
+    // Filter tasks based on priority and date
     const filteredTasks = (columnTasks) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
-            const taskDate = new Date(task.date);
-            const matchesDate = (startDate ? taskDate >= new Date(startDate) : true) &&
-                                (endDate ? taskDate <= new Date(endDate) : true);
+            const taskStartDate = new Date(task.startDate);
+            const matchesDate = (startDate ? taskStartDate >= new Date(startDate) : true) &&
+                                (endDate ? taskStartDate <= new Date(endDate) : true);
             return matchesPriority && matchesDate;
         });
     };
@@ -137,6 +139,8 @@ const Board = ({ tasks, setTasks }) => {
                 setFilterPriority={setFilterPriority} 
                 setStartDate={setStartDate} 
                 setEndDate={setEndDate} 
+                startDate={startDate}
+                endDate={endDate}
             />
             <DndProvider backend={HTML5Backend}>
                 <section>

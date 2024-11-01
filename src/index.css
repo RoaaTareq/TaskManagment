@@ -9,6 +9,22 @@ body {
   font-family: 'Nunito' !important;
   scroll-behavior: smooth;
 }
+.filter-btn{
+  background-color: rgb(6 8 110);
+  border-radius: 12px;
+  padding: 12px;
+  width: 250px;
+  color: #FFF;
+  margin: 0 6px;
+  border: none;
+  background: rgb(6 8 110);
+    box-shadow: inset 0 -4px 0 rgb(6 8 110);
+}
+.create-task{
+  background: rgb(6 8 110) !important;
+  border: none !important;
+  width: 200px !important;
+}
 .alert-text{
   color:red;
 }
@@ -117,7 +133,7 @@ body {
   border:2px dashed grey;
   margin: 6px;
   border-radius: 12px;
-  
+  padding: 20px;
   min-height: 100vh;
 }
 .label-form{

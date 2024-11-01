@@ -31,7 +31,7 @@ Sidebar.propTypes = {
 };
 
 Sidebar.defaultProps = {
-    brand: 'Company',
+    
     onPin: () => console.log('Pinned'),
     onClose: () => console.log('Closed'),
 };
