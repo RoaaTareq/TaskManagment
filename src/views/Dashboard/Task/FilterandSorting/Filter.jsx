@@ -2,16 +2,9 @@ import React from 'react';
 import Select from '../../../../components/DropDown/Select'; 
 import Input from '../../../../components/Input/Input'; 
 
-const Filter = ({ setFilterPriority, setStartDate, setEndDate }) => {
-    const priorityOptions = [
-        { label: 'All', value: '' },
-        { label: 'High', value: 'High' },
-        { label: 'Medium', value: 'Medium' },
-        { label: 'Low', value: 'Low' },
-    ];
-
-    const handlePriorityChange = (selectedOption) => {
-        setFilterPriority(selectedOption.value);
+const Filter = ({ setFilterPriority, setStartDate, setEndDate,startDate, endDate }) => {
+    const handlePriorityChange = (priority) => {
+        setFilterPriority(priority); // Set the priority filter based on button click
     };
 
     return (
@@ -20,13 +13,10 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate }) => {
                 <div className='row align-items-center'>
                     <div className='col-3'>
                         <div className="d-flex align-items-center">
-                            <label className='label-form'>Priority:</label>
-                            <Select
-                                options={priorityOptions}
-                                onChange={handlePriorityChange}
-                                placeholder="Select priority"
-                                className='mr-2'
-                            />
+                            <button onClick={() => handlePriorityChange('high')}>High</button>
+                            <button onClick={() => handlePriorityChange('medium')}>Medium</button>
+                            <button onClick={() => handlePriorityChange('low')}>Low</button>
+                            <button onClick={() => handlePriorityChange('')}>All</button> {/* Add an "All" button to reset */}
                         </div>
                     </div>
                     <div className='col-3'>
@@ -35,7 +25,8 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate }) => {
                             <Input
                                 type="date"
                                 name="startDate"
-                                onChange={(e) => setStartDate(e.target.value)} // Set start date
+                                value={startDate || ""}
+                                onChange={(e) => setStartDate(e.target.value)}
                                 className='mr-2'
                             />
                         </div>
@@ -46,7 +37,8 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate }) => {
                             <Input
                                 type="date"
                                 name="endDate"
-                                onChange={(e) => setEndDate(e.target.value)} // Set end date
+                                value={endDate || ""}
+                                onChange={(e) => setEndDate(e.target.value)}
                                 className='ml-2'
                             />
                         </div>
