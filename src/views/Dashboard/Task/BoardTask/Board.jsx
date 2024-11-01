@@ -3,13 +3,12 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { deleteTaskFromDB } from '../../../../db'; 
 import Filter from '../FilterandSorting/Filter';
-import EditTaskForm from '../Models/Edittask'; // Import the EditTaskForm component
+import EditTaskForm from '../Models/Edittask';
 
 const ItemTypes = {
     TASK: 'task',
 };
 
-// Task component
 const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
     const [{ isDragging }, drag] = useDrag({
         type: ItemTypes.TASK,
@@ -21,18 +20,24 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
 
     return (
         <div ref={drag} className='drag-card' style={{ opacity: isDragging ? 0.5 : 1 }}>
-            <div className="d-flex justify-content-between align-items-center">
-                <div>{task.description} - {task.priority}</div>
-                <div className="task-actions">
+              <div className="task-actions d-flex justify-content-end">
                     <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
                     <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
                 </div>
+            <div className="d-flex justify-content-between align-items-center">
+            
+              <div className='d-flex flex-column'>
+                <span>{task.priority}</span>
+                <p>  {task.description} 
+                </p>
+                <span>{task.startDate} to {task.endDate}</span>
+              </div>
+            
             </div>
         </div>
     );
 };
 
-// Column component
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
         accept: ItemTypes.TASK,
@@ -59,13 +64,12 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     );
 };
 
-// Board component
 const Board = ({ tasks, setTasks }) => {
     const [filterPriority, setFilterPriority] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [isEditing, setIsEditing] = useState(false);
-    const [currentTask, setCurrentTask] = useState(null); // State to hold the task being edited
+    const [currentTask, setCurrentTask] = useState(null);
 
     const moveTask = (fromIndex, toColumnId, fromColumnId) => {
         const sourceTasks = Array.from(tasks[fromColumnId]);
@@ -89,31 +93,34 @@ const Board = ({ tasks, setTasks }) => {
     };
 
     const editTask = (task) => {
-        setCurrentTask(task); // Set the current task to edit
-        setIsEditing(true); // Show the edit form
+        setCurrentTask(task);
+        setIsEditing(true);
     };
 
     const handleEditSubmit = (updatedTask) => {
         if (!currentTask) {
-            console.error("No task selected for editing");
+            console.error("No valid task selected for editing");
             return; // Early return if there's no current task
         }
-    
+
+        // Updating task in state
         setTasks((prevTasks) => {
-            const updatedTasks = prevTasks[currentTask.columnId].map((task) =>
+            const currentColumnTasks = prevTasks[currentTask.columnId] || [];
+            const updatedTasks = currentColumnTasks.map((task) =>
                 task.id === currentTask.id ? { ...task, ...updatedTask } : task
             );
-    
+
             return {
                 ...prevTasks,
                 [currentTask.columnId]: updatedTasks,
             };
         });
-    
-        setIsEditing(false); // Close the edit form
-        setCurrentTask(null); // Reset current task
+
+        // Reset state after submission
+        setIsEditing(false);
+        setCurrentTask(null);
     };
-    
+
     const filteredTasks = (columnTasks) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
@@ -162,7 +169,7 @@ const Board = ({ tasks, setTasks }) => {
                         </div>
                     </div>
                 </section>
-                {isEditing && currentTask && ( // Ensure currentTask is set before rendering form
+                {isEditing && currentTask && (
                     <EditTaskForm 
                         onSubmit={handleEditSubmit} 
                         onCancel={() => {
@@ -174,6 +181,8 @@ const Board = ({ tasks, setTasks }) => {
                             endDate: currentTask.endDate,
                             priority: currentTask.priority,
                             description: currentTask.description,
+                            id: currentTask.id,
+                            columnId: currentTask.columnId 
                         }} 
                     />
                 )}
