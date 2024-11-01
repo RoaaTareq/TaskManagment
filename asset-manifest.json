@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/TaskManagment/static/css/main.7a87b81b.css",
+    "main.css": "/TaskManagment/static/css/main.b2f87347.css",
     "main.js": "/TaskManagment/static/js/main.44d21282.js",
     "static/js/453.ed3810f9.chunk.js": "/TaskManagment/static/js/453.ed3810f9.chunk.js",
     "static/media/ai-service-management-platform.png": "/TaskManagment/static/media/ai-service-management-platform.c6cd3fd6a76a8a8d38aa.png",
@@ -18,12 +18,12 @@
     "static/media/fa-v4compatibility.ttf": "/TaskManagment/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
     "static/media/fa-v4compatibility.woff2": "/TaskManagment/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/TaskManagment/index.html",
-    "main.7a87b81b.css.map": "/TaskManagment/static/css/main.7a87b81b.css.map",
+    "main.b2f87347.css.map": "/TaskManagment/static/css/main.b2f87347.css.map",
     "main.44d21282.js.map": "/TaskManagment/static/js/main.44d21282.js.map",
     "453.ed3810f9.chunk.js.map": "/TaskManagment/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a87b81b.css",
+    "static/css/main.b2f87347.css",
     "static/js/main.44d21282.js"
   ]
 }
