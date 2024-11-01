@@ -60,6 +60,7 @@ export const updateTaskInDB = async (task) => {
 };
 
 // ----- Employee Functions -----
+// Employee Functions
 export const addEmployee = async (employee) => {
     const db = await initDB();
     return db.add(EMPLOYEE_STORE_NAME, employee);
@@ -72,14 +73,13 @@ export const getEmployees = async () => {
 
 export const deleteEmployee = async (employeeId) => {
     const db = await initDB();
-    await db.delete(EMPLOYEE_STORE_NAME, employeeId);
+    return db.delete(EMPLOYEE_STORE_NAME, employeeId);
 };
 
 export const updateEmployee = async (employee) => {
     const db = await initDB();
-    await db.put(EMPLOYEE_STORE_NAME, employee);
+    return db.put(EMPLOYEE_STORE_NAME, employee);
 };
-
 // ----- Project Functions -----
 export const addProject = async (project) => {
     const db = await initDB();

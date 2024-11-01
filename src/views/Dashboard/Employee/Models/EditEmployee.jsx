@@ -2,11 +2,15 @@ import React, { useRef, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../../../components/Input/Input';
-import Button from '../../../../components/Button/Button';
-import { addEmployee } from '../../../../db'; // Import the addEmployee function
 
-const EmployeeForm = ({ onSubmit, onCancel }) => {
+import Button from '../../../../components/Button/Button';
+
+import '../../../../assets/style/form.css';
+
+const EditEmployee = ({ onSubmit, onCancel }) => {
     const formRef = useRef(null);
+
+  
 
     const validationSchema = Yup.object({
         employeeName: Yup.string().required('Employee Name is required'),
@@ -16,7 +20,16 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
         phone: Yup.string()
             .matches(/^[0-9]+$/, 'Phone must contain only numbers')
             .min(10, 'Phone number is too short')
-            .required('Phone is required')
+            .required('Phone is required'),
+        startDate: Yup.date()
+            .required('Start Date is required')
+            .typeError('Start Date must be a valid date'),
+        endDate: Yup.date()
+            .required('End Date is required')
+            .typeError('End Date must be a valid date')
+            .min(Yup.ref('startDate'), "End Date can't be before Start Date"),
+        priority: Yup.string().required('Priority is required'),
+        description: Yup.string().required('Description is required'),
     });
 
     const formik = useFormik({
@@ -25,17 +38,16 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
             employeeProfile: '',
             userName: '',
             department: '',
-            phone: ''
+            phone: '',
+            startDate: '',
+            endDate: '',
+            priority: '',
+            description: '',
         },
         validationSchema,
-        onSubmit: async (values) => {
-            try {
-                await addEmployee(values); // Store employee data in IndexedDB
-                onSubmit(values); // Optional: Callback to perform additional actions
-            } catch (error) {
-                console.error('Error adding employee:', error);
-            }
-        }
+        onSubmit: (values) => {
+            onSubmit(values);
+        },
     });
 
     useEffect(() => {
@@ -46,6 +58,7 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
         };
 
         document.addEventListener('mousedown', handleClickOutside);
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -54,7 +67,7 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
     return (
         <div ref={formRef}>
             <form onSubmit={formik.handleSubmit} className="task-form">
-                <h5>Add Employee Info</h5>
+                <h5>Edit Employee Info</h5>
 
                 <Input
                     name="employeeName"
@@ -67,6 +80,7 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
                 )}
 
                 <Input
+                   type='file'
                     name="employeeProfile"
                     value={formik.values.employeeProfile}
                     onChange={formik.handleChange}
@@ -106,6 +120,12 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
                     <div className="alert-text">{formik.errors.phone}</div>
                 )}
 
+             
+
+             
+
+           
+
                 <Button
                     type="submit"
                     variant="primary"
@@ -114,7 +134,7 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
                     isDisabled={formik.isSubmitting}
                     isLoading={formik.isSubmitting}
                 >
-                    Submit Employee
+                    Update Employee
                 </Button>
 
                 <Button
@@ -131,4 +151,4 @@ const EmployeeForm = ({ onSubmit, onCancel }) => {
     );
 };
 
-export default EmployeeForm;
+export default EditEmployee;
