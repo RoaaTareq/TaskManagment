@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Heading from '../../components/Typography/Heading1'; // Ensure this path is correct
+import Heading from '../../components/Typography/Heading1'; 
 import Manage from '../../assets/images/UI_Illo__Workspace_Views_2x.webp';
 
 const Management = () => {

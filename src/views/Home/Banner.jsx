@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import style from '../../assets/style/banner.module.css';
@@ -10,7 +9,7 @@ const Banner = () => {
             <Container>
                 <Row>
                     <Col className="text-center">
-                        <h2 className='mt-4 mb-4 text-white'>Get started with Trello today</h2>
+                        <h2 className='mt-4 mb-4 text-white'>Get started with Task Management System today</h2>
                         <Button className={`mt-4 mb-4 ${style.btn_register}`}>
                             Register Now!
                         </Button>

@@ -39,11 +39,11 @@ const featuresData = [
     },
     {
         title: '24/7 Support',
-        content: 'No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.',
+        content: 'No-code automation is built into every Task board. Focus on the work that matters most and let the robots do the rest.',
     },
     {
         title: 'Easy to Use',
-        content: 'No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.',
+        content: 'No-code automation is built into every Task board. Focus on the work that matters most and let the robots do the rest.',
     }
 ];
 

@@ -17,7 +17,7 @@ const Reson = () => {
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat consequuntur eum illo doloremque impedit, accusantium nobis aspernatur, aliquid, et voluptatibus aliquam officia accusamus! Sit illum ipsam culpa modi ex.
                         </p>
                     </Col>
-                    <Col md={5}> {/* Changed to 5 for better column distribution */}
+                    <Col md={5}> 
                         <img 
                             src={OurProductApp} 
                             alt="Product Management App" 
