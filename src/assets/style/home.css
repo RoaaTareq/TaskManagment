@@ -1,0 +1,44 @@
+.Main_section{
+    background: linear-gradient(60deg, rgb(82, 67, 170), rgb(6 8 110));
+    padding: 120px;
+   
+}
+.main_img{
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+    opacity: 0; 
+    transform: scale(0.9); 
+    animation: fadeInScale 1s forwards; 
+}
+@keyframes fadeInScale {
+    to {
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+.circular-animation {
+    animation: rotate 10s linear infinite; 
+    display: block; 
+    margin: 0 auto; 
+  }
+  
+  @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+.manage-section{
+    background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box transparent;
+        background-blend-mode: normal;
+    
+}
+
+@media screen and (max-width: 767px) {
+.Main_section{
+    padding: 20px;
+}
+}

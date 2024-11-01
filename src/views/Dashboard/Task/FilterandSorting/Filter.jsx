@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../../../../components/Input/Input'; 
 import Button from '../../../../components/Button/Button'; // Import the reusable Button
-
+import '../../../../assets/style/customcomponents.css'
 const Filter = ({ setFilterPriority, setStartDate, setEndDate, startDate, endDate }) => {
     const handlePriorityChange = (priority) => {
         setFilterPriority(priority); // Set the priority filter based on button click

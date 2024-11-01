@@ -5,7 +5,7 @@ import Manage from '../../assets/images/UI_Illo__Workspace_Views_2x.webp';
 
 const Management = () => {
     return (
-        <section className='section-padding'>
+        <section className='section-padding manage-section'>
             <Container>
                 <Row className="align-items-center">
                     <Col md={6}>

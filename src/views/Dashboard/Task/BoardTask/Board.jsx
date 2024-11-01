@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { deleteTaskFromDB } from '../../../../db'; 
 import Filter from '../FilterandSorting/Filter';
 import EditTaskForm from '../Models/Edittask';
+import '../../../../assets/style/dragboard.css'
 
 const ItemTypes = {
     TASK: 'task',

@@ -19,19 +19,6 @@ body {
 .alert-text{
   color:red;
 }
-.filter-btn{
-  background-color: rgb(6 8 110) !important;
-  border-radius: 12px !important;
-  padding: 12px !important;
-  width: 250px !important;
-  color: #FFF !important;
-  margin: 0 6px !important;
-  border: none !important;
-  background: rgb(6 8 110) !important;
-  box-shadow: inset 0 -4px 0 rgb(6 8 110) !important;
-}
-
-
 
 .footer-bg,.sidebar-bg{
   background: linear-gradient(60deg, rgb(82, 67, 170), rgb(6 8 110));
@@ -59,24 +46,6 @@ body {
 
 
 
-.drag-card{
-  padding: 10px;
-    margin: 5px 0px;
-    background-color: #e3e1ee;
-    cursor: move;
-    height: 187px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px hsla(220, 6%, 90%, .66), 0 0 8px rgba(228, 231, 236, .3);
-    border-radius: 14px;
-}
-
-.board-layout{
-  border:2px dashed grey;
-  margin: 6px;
-  border-radius: 12px;
-  padding: 20px;
-  min-height: 100vh;
-}
 
 
 
@@ -84,17 +53,4 @@ body {
 
 
 
-.circular-animation {
-  animation: rotate 10s linear infinite; 
-  display: block; 
-  margin: 0 auto; 
-}
 
-@keyframes rotate {
-  from {
-      transform: rotate(0deg);
-  }
-  to {
-      transform: rotate(360deg);
-  }
-}

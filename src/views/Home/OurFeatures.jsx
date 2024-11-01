@@ -5,7 +5,7 @@ import Card from '../../components/Card/Card';
 
 const Features = ({ features }) => {
     return (
-        <section className='section-padding'>
+        <section className='section-padding '>
             <Container>
                 <h2 className="text-center">Our Features</h2>
                 <Row className="d-flex">
