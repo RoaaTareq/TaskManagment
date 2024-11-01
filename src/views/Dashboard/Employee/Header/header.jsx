@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Button from "react-bootstrap/Button"; 
 import Alert from "react-bootstrap/Alert"; 
-import TaskForm from "../Models/CreateTask";
-import Board from "../BoardTask/Board";
+import TaskForm from "../Models/CreateEmployee";
+
 import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
 
-const TaskHeader = () => {
+const EmployeeHeader = () => {
     const [showForm, setShowForm] = useState(false);
     const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
     const [loading, setLoading] = useState(true);
@@ -54,8 +54,8 @@ const TaskHeader = () => {
         <section>
             <div className="container">
                 <div className="d-flex justify-content-between mt-4 mb-4">
-                    <h1>Task Management</h1>
-                    <Button className="create-task" onClick={toggleForm}>Add Task +</Button> {/* Bootstrap button */}
+                    <h1>Employee Management</h1>
+                    <Button className="create-task" onClick={toggleForm}>Add Employee +</Button> {/* Bootstrap button */}
                 </div>
                 
                 {loading && <p>Loading tasks...</p>}
@@ -69,9 +69,9 @@ const TaskHeader = () => {
                 )}
             </div>
             
-            <Board setTasks={setTasks} tasks={tasks} />
+            
         </section>
     );
 };
 
-export default TaskHeader;
+export default EmployeeHeader;

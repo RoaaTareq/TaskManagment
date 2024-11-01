@@ -8,9 +8,9 @@ import Employee from '../Employee/employee';
 
 
 const menuItems = [
-  { label: 'Create Task', link: 'task' },
-  { label: 'Create Project', link: 'project' },
-  { label: 'Create Employee', link: 'employee' },
+  { label: 'Managemnt Task', link: 'task' },
+  { label: 'Management Project', link: 'project' },
+  { label: 'Management Employee', link: 'employee' },
 ];
 
 function MainSidebar() {

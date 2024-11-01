@@ -1,8 +1,11 @@
 import React from 'react'
+import EmployeeHeader from './Header/header'
 
 function Employee (){
     return(
-        <h1>Employee</h1>
+      <>
+      <EmployeeHeader/>
+      </>
     )
 
 }

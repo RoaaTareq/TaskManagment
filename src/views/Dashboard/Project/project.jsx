@@ -1,8 +1,10 @@
 import React from 'react'
-
+import ProjectHeader from './Header/header'
 function Project (){
     return(
-        <h1>Project</h1>
+       <>
+       <ProjectHeader/>
+       </>
     )
 
 }
