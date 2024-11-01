@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/TaskManagment/static/css/main.7a87b81b.css",
+    "main.js": "/TaskManagment/static/js/main.44d21282.js",
+    "static/js/453.ed3810f9.chunk.js": "/TaskManagment/static/js/453.ed3810f9.chunk.js",
+    "static/media/ai-service-management-platform.png": "/TaskManagment/static/media/ai-service-management-platform.c6cd3fd6a76a8a8d38aa.png",
+    "static/media/fa-solid-900.ttf": "/TaskManagment/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/Nunito-VariableFont_wght.ttf": "/TaskManagment/static/media/Nunito-VariableFont_wght.c0f0807a40aebdc41b40.ttf",
+    "static/media/fa-brands-400.ttf": "/TaskManagment/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/fa-solid-900.woff2": "/TaskManagment/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/TaskManagment/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/UI_Illo__Workspace_Views_2x.webp": "/TaskManagment/static/media/UI_Illo__Workspace_Views_2x.d946e01d3ba6fa8fd1ed.webp",
+    "static/media/hero-left.svg": "/TaskManagment/static/media/hero-left.e5216459eeb18a6e76af.svg",
+    "static/media/hero-right.svg": "/TaskManagment/static/media/hero-right.88a65aad85bb2a16ea59.svg",
+    "static/media/fa-regular-400.ttf": "/TaskManagment/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/Product_Management_Playbook_2x.webp": "/TaskManagment/static/media/Product_Management_Playbook_2x.72f21cd0935f07036ef9.webp",
+    "static/media/fa-regular-400.woff2": "/TaskManagment/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/TaskManagment/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/fa-v4compatibility.woff2": "/TaskManagment/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
+    "index.html": "/TaskManagment/index.html",
+    "main.7a87b81b.css.map": "/TaskManagment/static/css/main.7a87b81b.css.map",
+    "main.44d21282.js.map": "/TaskManagment/static/js/main.44d21282.js.map",
+    "453.ed3810f9.chunk.js.map": "/TaskManagment/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a87b81b.css",
+    "static/js/main.44d21282.js"
+  ]
+}
