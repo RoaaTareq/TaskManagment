@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'; 
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { deleteTaskFromDB } from '../../../../db'; 
 
 const ItemTypes = {
     TASK: 'task',
@@ -87,7 +88,11 @@ const Board = ({ tasks, setTasks }) => {
         });
     };
 
-    const deleteTask = (task, columnId) => {
+    const deleteTask = async (task, columnId) => {
+        
+        await deleteTaskFromDB(task.id); 
+        
+       
         setTasks((prevTasks) => ({
             ...prevTasks,
             [columnId]: prevTasks[columnId].filter((t) => t.id !== task.id),
@@ -111,7 +116,7 @@ const Board = ({ tasks, setTasks }) => {
         <DndProvider backend={HTML5Backend}>
             <section>
                 <div className="container">
-                    <div className="row m-auto justify-content-center mt-4">
+                    <div className="row m-auto justify-content-between mt-4">
                         <Column
                             title="To Do"
                             tasks={tasks.todo}

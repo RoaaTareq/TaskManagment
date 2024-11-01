@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Button from "../../../../components/Button/Button";
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
+import Filter from '../FilterandSorting/Filter'
 import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
 const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
@@ -65,6 +66,7 @@ const TaskHeader = () => {
                     </div>
                 )}
             </div>
+            <Filter/>
             <Board tasks={tasks} setTasks={setTasks} />
         </section>
     );
