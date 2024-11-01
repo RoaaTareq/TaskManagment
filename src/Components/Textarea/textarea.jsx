@@ -1,6 +1,7 @@
 // Textarea.js
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 
 const Textarea = ({
     name,
@@ -13,7 +14,8 @@ const Textarea = ({
 }) => {
     return (
         <div className={`textarea-wrapper ${className}`}>
-            <textarea
+            <Form.Control
+                as="textarea"
                 name={name}
                 value={value}
                 onChange={onChange}

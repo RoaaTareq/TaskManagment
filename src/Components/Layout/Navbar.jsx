@@ -1,30 +1,21 @@
+// Navbar.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Navbar as BootstrapNavbar, Nav, Container } from 'react-bootstrap';
 
 const Navbar = ({ brand, links, bgColor = 'light' }) => {
     return (
-        <nav className={`navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-${bgColor} bg-${bgColor}`}>
-            <div className="container">
+        <BootstrapNavbar bg={bgColor} variant={bgColor} expand="lg" className="sticky-top">
+            <Container>
                 <Link className="navbar-brand" to="/">
                     {brand}
                 </Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-auto align-items-center"> {/* Align links to the right */}
+                <BootstrapNavbar.Toggle aria-controls="navbarNav" />
+                <BootstrapNavbar.Collapse id="navbarNav">
+                    <Nav className="ms-auto align-items-center"> {/* Align links to the right */}
                         {links.map((link, index) => (
-                            <li className="nav-item" key={index}>
+                            <Nav.Item key={index}>
                                 {link.onClick ? (
                                     <button
                                         onClick={link.onClick}
@@ -38,12 +29,12 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
                                         {link.label}
                                     </Link>
                                 )}
-                            </li>
+                            </Nav.Item>
                         ))}
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    </Nav>
+                </BootstrapNavbar.Collapse>
+            </Container>
+        </BootstrapNavbar>
     );
 };
 

@@ -1,6 +1,7 @@
 // Input.js
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 
 const Input = ({
     type = 'text', 
@@ -10,9 +11,9 @@ const Input = ({
     onChange,
 }) => {
     return (
-        <input
+        <Form.Control
             type={type}
-            className="form-control mt-2 mb-2" 
+            className="mt-2 mb-2" 
             placeholder={placeholder}
             value={value}
             name={name} // Add the name attribute here

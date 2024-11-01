@@ -1,15 +1,15 @@
+// Select.js
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
+import { Form } from 'react-bootstrap';
 
 const Select = ({ options, value, onChange, placeholder = 'Select an option', isDisabled = false }) => {
     return (
-        <select
-            className="form-select" 
+        <Form.Select
             value={value}
             onChange={onChange}
             disabled={isDisabled}
+            className="form-select"
         >
             <option value="" disabled>{placeholder}</option>
             {options.map((option) => (
@@ -17,10 +17,9 @@ const Select = ({ options, value, onChange, placeholder = 'Select an option', is
                     {option.label}
                 </option>
             ))}
-        </select>
+        </Form.Select>
     );
 };
-
 
 Select.propTypes = {
     options: PropTypes.arrayOf(

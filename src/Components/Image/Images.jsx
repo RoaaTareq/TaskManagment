@@ -1,16 +1,17 @@
 // Image.js
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Image as BootstrapImage } from 'react-bootstrap';
 
 const Image = ({ src, alt, className = '', rounded = false, responsive = false }) => {
-    const imgClass = `${responsive ? 'img-fluid' : ''} ${rounded ? 'rounded' : ''} ${className}`;
-    
+    const imgClass = `${className} ${rounded ? 'rounded' : ''} ${responsive ? 'img-fluid' : ''}`;
+
     return (
-        <img
+        <BootstrapImage
             src={src}
             alt={alt}
             className={imgClass}
+            fluid={responsive} // Use Bootstrap's fluid prop for responsive images
         />
     );
 };

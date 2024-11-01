@@ -1,20 +1,20 @@
+// Card.js
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Card as BootstrapCard } from 'react-bootstrap';
 
 const Card = ({ title, content, image, footer }) => {
     return (
-        <div className="card custom-card">
-            {image && <img src={image} alt={title} className=" icon-card" />} 
-            <div className="card-body">
-                <h3 className="card-title">{title}</h3>
-                <p className="card-text text-justify">{content}</p> 
-            </div>
-            {footer && <div className="card-footer">{footer}</div>} 
-        </div>
+        <BootstrapCard className="custom-card">
+            {image && <BootstrapCard.Img src={image} alt={title} className="icon-card" />} 
+            <BootstrapCard.Body>
+                <BootstrapCard.Title>{title}</BootstrapCard.Title>
+                <BootstrapCard.Text className="text-justify">{content}</BootstrapCard.Text> 
+            </BootstrapCard.Body>
+            {footer && <BootstrapCard.Footer>{footer}</BootstrapCard.Footer>} 
+        </BootstrapCard>
     );
 };
-
 
 Card.propTypes = {
     title: PropTypes.string.isRequired,

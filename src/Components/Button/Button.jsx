@@ -1,6 +1,7 @@
 // Button.js
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button as BootstrapButton, Spinner } from 'react-bootstrap';
 
 const Button = ({
     variant = 'primary',
@@ -12,22 +13,31 @@ const Button = ({
     className // Accepting additional className prop
 }) => {
     
-    // Combine button classes with any additional className
-    const buttonClass = `btn btn-${variant} ${size ? `btn-${size}` : ''} ${className || ''}`.trim();
-
+    // Use BootstrapButton for Bootstrap styling
     return (
-        <button
+        <BootstrapButton
             type="submit" // Change type to "submit"
-            className={buttonClass} // Using the combined class string
-            disabled={isDisabled || isLoading}
+            variant={variant} // Bootstrap variant
+            size={size} // Bootstrap size
+            disabled={isDisabled || isLoading} // Disable if loading or disabled
             onClick={onClick}
+            className={className} // Allow additional className
         >
             {isLoading ? (
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 
+                <>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    <span className="visually-hidden">Loading...</span>
+                </>
             ) : (
                 children
             )}
-        </button>
+        </BootstrapButton>
     );
 };
 
