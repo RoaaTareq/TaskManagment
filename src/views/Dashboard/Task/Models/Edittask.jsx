@@ -5,6 +5,7 @@ import Input from '../../../../components/Input/Input';
 import Select from '../../../../components/DropDown/Select';
 import Button from '../../../../components/Button/Button';
 import Textarea from '../../../../components/Textarea/textarea';
+import '../../../../assets/style/form.css'
 import { updateTaskInDB } from '../../../../db'; // Ensure correct import path for your db functions
 
 const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {

@@ -1,16 +1,17 @@
+
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import style from '../../assets/style/banner.module.css';
 import Button from '../../components/Button/Button';
 
-function Banner() {
+const Banner = () => {
     return (
-        <section className={style.banner}>
+        <section className={`section-padding ${style.banner}`}>
             <Container>
                 <Row>
                     <Col className="text-center">
                         <h2 className='mt-4 mb-4 text-white'>Get started with Trello today</h2>
-                        <Button className={`mt-4 mb-4 m-auto d-flex justify-content-center ${style.btn_register}`}>
+                        <Button className={`mt-4 mb-4 ${style.btn_register}`}>
                             Register Now!
                         </Button>
                     </Col>
@@ -18,6 +19,6 @@ function Banner() {
             </Container>
         </section>
     );
-}
+};
 
-export default Banner;
+export default React.memo(Banner);

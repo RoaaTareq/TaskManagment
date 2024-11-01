@@ -6,6 +6,8 @@ import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input'; // Import Input component
 import Button from '../../components/Button/Button'; // Import Button component
+ 
+import '../../assets/style/form.css'
 
 const Login = () => {
     const navigate = useNavigate();

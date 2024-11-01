@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from '../../components/Card/Card'; 
-import style from '../../assets/style/feature.module.css';
 
-function Features({ features }) {
+
+const Features = ({ features }) => {
     return (
-        <section className={style.features}>
+        <section className='section-padding'>
             <Container>
                 <h2 className="text-center">Our Features</h2>
                 <Row className="d-flex">
-                    {features.map((feature, index) => (
-                        <Col md={4} key={index}>
+                    {features.map((feature) => (
+                        <Col md={4} key={feature.id || feature.title}> 
                             <Card 
                                 title={feature.title}
                                 content={feature.content}
@@ -22,6 +22,6 @@ function Features({ features }) {
             </Container>
         </section>
     );
-}
+};
 
-export default Features;
+export default memo(Features); 

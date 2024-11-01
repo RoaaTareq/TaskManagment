@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
+import '../../assets/style/sidebar.css'
 
 const Sidebar = ({ brand, menuItems, onPin, onClose }) => {
     return (

@@ -1,11 +1,12 @@
-import React from 'react';
+
+import React, { memo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Heading from '../../components/Typography/Heading1'; // Ensure this path is correct
+import Heading from '../../components/Typography/Heading1'; 
 import style from '../../assets/style/home.module.css';
 import Button from '../../components/Button/Button';
 import MainImage from '../../assets/video/ai-service-management-platform.png';
 
-function TopSection() {
+const TopSection = () => {
     return (
         <section className={style.Main_section}>
             <Container>
@@ -13,7 +14,7 @@ function TopSection() {
                     <Col md={6}>
                         <Heading 
                             level={1} 
-                            text="Welcome to My Website, Start Organizing tasks with a smooth experience" 
+                            text="Welcome to My Website, Start Organizing Tasks with a Smooth Experience" 
                             className="text-white" 
                         />
                         <Button className={`mt-4 mb-4 ${style.btn_register}`}>
@@ -21,12 +22,17 @@ function TopSection() {
                         </Button>
                     </Col>
                     <Col md={6}>
-                        <img src={MainImage} alt="" className={style.main_img} />
+                        <img 
+                            src={MainImage} 
+                            alt="AI Service Management Platform" 
+                            className={style.main_img} 
+                            loading="lazy" 
+                        />
                     </Col>
                 </Row>
             </Container>
         </section>
     );
-}
+};
 
-export default TopSection;
+export default memo(TopSection); 

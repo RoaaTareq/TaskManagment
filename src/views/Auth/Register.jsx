@@ -1,10 +1,13 @@
-// RegisterForm.js
+
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
 import { addUser } from '../../db'; 
+
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button'; 
+import '../../assets/style/form.css'
 
 const RegisterForm = () => {
     const formik = useFormik({

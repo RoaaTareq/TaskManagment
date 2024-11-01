@@ -5,7 +5,6 @@ import Navbar from './views/Layout/Navbar';
 import MainFooter from './views/Layout/MainFooter';
 import Register from './views/Auth/Register';
 import Login from './views/Auth/Login';
-import Dashboard from './views/Dashboard/Dashboard';
 import MainSidebar from './views/Dashboard/Layout/MainSidebar';
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/sign-in" element={<Login />} />
-        {/* Protect the dashboard route */}
+       
         <Route
           path="/dashboard/*"
           element={loggedInUser ? <MainSidebar /> : <Navigate to="/sign-in" />}

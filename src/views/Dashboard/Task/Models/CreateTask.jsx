@@ -5,6 +5,7 @@ import Input from '../../../../components/Input/Input';
 import Select from '../../../../components/DropDown/Select';
 import Button from '../../../../components/Button/Button';
 import Textarea from '../../../../components/Textarea/textarea';
+import '../../../../assets/style/form.css'
 
 const TaskForm = ({ onSubmit, onCancel }) => {
     const formRef = useRef(null); // Reference to the form container
