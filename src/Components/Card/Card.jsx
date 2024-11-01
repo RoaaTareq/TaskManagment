@@ -1,4 +1,3 @@
-// Card.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card as BootstrapCard } from 'react-bootstrap';

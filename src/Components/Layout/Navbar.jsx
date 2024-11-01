@@ -1,4 +1,3 @@
-// Navbar.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,7 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
                 </Link>
                 <BootstrapNavbar.Toggle aria-controls="navbarNav" />
                 <BootstrapNavbar.Collapse id="navbarNav">
-                    <Nav className="ms-auto align-items-center"> {/* Align links to the right */}
+                    <Nav className="ms-auto align-items-center"> 
                         {links.map((link, index) => (
                             <Nav.Item key={index}>
                                 {link.onClick ? (
@@ -44,7 +43,7 @@ Navbar.propTypes = {
         PropTypes.shape({
             label: PropTypes.string.isRequired,
             href: PropTypes.string,
-            onClick: PropTypes.func // Allow for optional onClick function
+            onClick: PropTypes.func 
         })
     ).isRequired,
     bgColor: PropTypes.oneOf(['light', 'dark']),

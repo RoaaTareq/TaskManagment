@@ -1,4 +1,3 @@
-// Footer.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
@@ -41,7 +40,7 @@ const Footer = ({ copyright, links, socialLinks }) => {
     );
 };
 
-// Define prop types for the footer component
+
 Footer.propTypes = {
     copyright: PropTypes.string.isRequired,
     links: PropTypes.arrayOf(

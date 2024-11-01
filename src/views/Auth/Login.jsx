@@ -4,8 +4,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../components/Input/Input'; // Import Input component
-import Button from '../../components/Button/Button'; // Import Button component
+import Input from '../../components/Input/Input'; 
+import Button from '../../components/Button/Button'; 
  
 import '../../assets/style/form.css'
 
@@ -52,7 +52,7 @@ const Login = () => {
                 {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
                 <form onSubmit={formik.handleSubmit} noValidate className='login-form'>
                     <h3 className='text-center'>Log in to continue</h3>
-                    <div >
+                    <div>
                         <label>Email:</label>
                         <Input
                             type="email"

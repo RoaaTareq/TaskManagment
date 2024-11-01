@@ -1,4 +1,3 @@
-// Textarea.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
@@ -10,7 +9,7 @@ const Textarea = ({
     placeholder = '',
     rows = 4,
     className = '',
-    error, // For displaying validation error messages
+    error, 
 }) => {
     return (
         <div className={`textarea-wrapper ${className}`}>
@@ -28,7 +27,7 @@ const Textarea = ({
     );
 };
 
-// Define prop types for the Textarea component
+
 Textarea.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
