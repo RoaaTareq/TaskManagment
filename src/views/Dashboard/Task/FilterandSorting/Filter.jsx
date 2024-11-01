@@ -1,6 +1,6 @@
 import React from 'react';
-import Select from '../../../../components/DropDown/Select'; 
 import Input from '../../../../components/Input/Input'; 
+import Button from '../../../../components/Button/Button'; // Import the reusable Button
 
 const Filter = ({ setFilterPriority, setStartDate, setEndDate, startDate, endDate }) => {
     const handlePriorityChange = (priority) => {
@@ -13,10 +13,10 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate, startDate, endDat
                 <div className='row align-items-center'>
                     <div className='col-6'>
                         <div className="d-flex align-items-center mt-4 mb-4">
-                            <button className='filter-btn' onClick={() => handlePriorityChange('high')}>High</button>
-                            <button className='filter-btn' onClick={() => handlePriorityChange('medium')}>Medium</button>
-                            <button className='filter-btn' onClick={() => handlePriorityChange('low')}>Low</button>
-                            <button className='filter-btn' onClick={() => handlePriorityChange('')}>All</button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('high')}>High</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('medium')}>Medium</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('low')}>Low</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('')}>All</Button>
                         </div>
                     </div>
                     <div className='col-3'>

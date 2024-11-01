@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Button from "react-bootstrap/Button"; // Importing Button from React Bootstrap
-import Alert from "react-bootstrap/Alert"; // Importing Alert for error messages
-import Modal from "react-bootstrap/Modal"; // Importing Modal for task creation
+import Button from "react-bootstrap/Button"; 
+import Alert from "react-bootstrap/Alert"; 
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
 import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
