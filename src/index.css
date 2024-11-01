@@ -7,6 +7,7 @@
 
 body {
   font-family: 'Nunito' !important;
+  scroll-behavior: smooth;
 }
 .alert-text{
   color:red;
@@ -138,4 +139,29 @@ body {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
     box-sizing: border-box;
     color: var(--ds-text-subtle, #42526E);
+}
+
+.reason-section{
+  padding: 80px;
+  background: linear-gradient(rgb(222, 235, 255), rgb(255, 255, 255)) no-repeat;
+}
+.manage-section{
+  padding: 80px;
+}
+
+
+/* Reson.css */
+.circular-animation {
+  animation: rotate 10s linear infinite; /* Adjust duration and type of animation as needed */
+  display: block; /* Ensures the image behaves as a block element */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+@keyframes rotate {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
 }
