@@ -28,20 +28,7 @@ const Task = ({ task, index, moveTask, columnId }) => {
 
 // Column Component
 const Column = ({ title, tasks, moveTask, columnId }) => {
-    const getBorderColor = () => {
-        switch (columnId) {
-            case 'todo':
-                return 'red';
-            case 'inProgress':
-                return 'yellow';
-            case 'done':
-                return 'green';
-            default:
-                return 'black';
-        }
-    };
-
-    const borderColor = getBorderColor();
+   
 
     const [, drop] = useDrop({
         accept: ItemTypes.TASK,
@@ -54,17 +41,8 @@ const Column = ({ title, tasks, moveTask, columnId }) => {
     return (
         <div
             ref={drop}
-            className="col-3"
-            style={{
-                minHeight: '100vh',
-                border: `2px solid ${borderColor}`,
-                padding: '10px',
-                backgroundColor: 'white', // Optional: Set background color for better contrast
-                width:'30%',
-                margin:'12px',
-                borderRadius:'12px'
-
-            }}
+            className="col-3 board-layout"
+            
         >
             <h5>{title}</h5>
             {tasks.map((task, index) => (
@@ -80,15 +58,15 @@ const Board = ({ tasks, setTasks }) => {
         const sourceTasks = Array.from(tasks[fromColumnId]);
         const [movedTask] = sourceTasks.splice(fromIndex, 1); // Remove the task from the source column
 
-        // Update destination tasks
+      
         const destinationTasks = Array.from(tasks[toColumnId]);
-        destinationTasks.push(movedTask); // Add the task to the destination column
+        destinationTasks.push(movedTask); 
 
-        // Update the tasks state
+       
         setTasks({
             ...tasks,
-            [fromColumnId]: sourceTasks, // Update source column
-            [toColumnId]: destinationTasks, // Update destination column
+            [fromColumnId]: sourceTasks, 
+            [toColumnId]: destinationTasks, 
         });
     };
 
@@ -96,7 +74,7 @@ const Board = ({ tasks, setTasks }) => {
         <DndProvider backend={HTML5Backend}>
             <section>
                 <div className="container">
-                    <div className="row m-auto">
+                    <div className="row m-auto justify-content-center mt-4">
                         <Column title="To Do" tasks={tasks.todo} moveTask={moveTask} columnId="todo" />
                         <Column title="In Progress" tasks={tasks.inProgress} moveTask={moveTask} columnId="inProgress" />
                         <Column title="Done" tasks={tasks.done} moveTask={moveTask} columnId="done" />
