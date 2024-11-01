@@ -7,12 +7,16 @@ const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
     const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
 
+  
+    const handleCancel = () => {
+        setShowForm(false); 
+    };
     
     const toggleForm = useCallback(() => {
         setShowForm(prev => !prev);
     }, []);
 
-    // Handle adding new task
+    
     const addTask = useCallback((task) => {
         setTasks(prevTasks => ({
             ...prevTasks,
@@ -31,7 +35,7 @@ const TaskHeader = () => {
               
                 {showForm && (
                     <div className="mt-3">
-                        <TaskForm onSubmit={addTask} />
+                        <TaskForm onSubmit={addTask} onCancel={handleCancel} />
                     </div>
                 )}
             </div>

@@ -19,12 +19,7 @@ const Task = ({ task, index, moveTask, columnId }) => {
     return (
         <div
             ref={drag}
-            style={{
-                padding: '10px',
-                margin: '5px 0',
-                backgroundColor: isDragging ? '#d9e7ff' : '#f0f0f0',
-                cursor: 'move',
-            }}
+           className='drag-card'
         >
             {task.description} - {task.priority}
         </div>
