@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Button from "../../../../components/Button/Button";
+import Button from "react-bootstrap/Button"; // Importing Button from React Bootstrap
+import Alert from "react-bootstrap/Alert"; // Importing Alert for error messages
+import Modal from "react-bootstrap/Modal"; // Importing Modal for task creation
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
 import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
@@ -54,12 +56,13 @@ const TaskHeader = () => {
             <div className="container">
                 <div className="d-flex justify-content-between mt-4 mb-4">
                     <h1>Task Management</h1>
-                    <Button className='create-task'onClick={toggleForm}>Create Task +</Button>
+                    <Button variant="primary" onClick={toggleForm}>Create Task +</Button> {/* Bootstrap button */}
                 </div>
                 
                 {loading && <p>Loading tasks...</p>}
-                {error && <p className="error">{error}</p>}
+                {error && <Alert variant="danger">{error}</Alert>} {/* Bootstrap alert for error messages */}
 
+               
                 {showForm && (
                     <div className="mt-3">
                         <TaskForm onSubmit={addTask} onCancel={handleCancel} />
