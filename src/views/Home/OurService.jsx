@@ -2,13 +2,14 @@
 import React, { memo } from 'react';
 import Card from '../../components/Card/Card'; 
 import { Container, Row, Col } from 'react-bootstrap';
-
+import Heading from '../../components/Typography/Heading1';
 
 const Service = ({ services }) => {
     return (
         <section className='section-padding'>
             <Container>
-                <h2 className="text-center">Our Services</h2>
+            <Heading level={2} text="Our Services" className="text-center" />
+        
                 <Row className="d-flex">
                     {services.map((service, index) => (
                         <Col md={4} key={service.id || index}> 

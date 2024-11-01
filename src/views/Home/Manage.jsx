@@ -1,6 +1,8 @@
+// Management.js
 import React, { memo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Heading from '../../components/Typography/Heading1'; 
+import Heading from '../../components/Typography/Heading1';
+import Image from '../../components/Image/Images'; 
 import Manage from '../../assets/images/UI_Illo__Workspace_Views_2x.webp';
 
 const Management = () => {
@@ -9,11 +11,12 @@ const Management = () => {
             <Container>
                 <Row className="align-items-center">
                     <Col md={6}>
-                        <img 
-                            src={Manage} 
-                            alt="Illustration of a workspace management system" 
-                            className='w-75 h-auto d-flex' 
-                            loading="lazy" 
+                        <Image
+                            src={Manage}
+                            alt="Illustration of a workspace management system"
+                            className="w-75 h-auto d-flex"
+                            responsive 
+                            rounded   
                         />
                     </Col>
                     <Col md={6}>
@@ -30,4 +33,4 @@ const Management = () => {
     );
 };
 
-export default memo(Management); 
+export default memo(Management);

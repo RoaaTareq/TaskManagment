@@ -1,8 +1,8 @@
-
 import React, { memo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Heading from '../../components/Typography/Heading1'; 
-import  '../../assets/style/home.css';
+import Heading from '../../components/Typography/Heading1';
+import Image from '../../components/Image/Images'; 
+import '../../assets/style/home.css';
 import Button from '../../components/Button/Button';
 import MainImage from '../../assets/video/ai-service-management-platform.png';
 
@@ -22,11 +22,11 @@ const TopSection = () => {
                         </Button>
                     </Col>
                     <Col md={6}>
-                        <img 
-                            src={MainImage} 
-                            alt="AI Service Management Platform" 
-                            className='main_img' 
-                            loading="lazy" 
+                        <Image
+                            src={MainImage}
+                            alt="AI Service Management Platform"
+                            className="main_img"
+                            responsive 
                         />
                     </Col>
                 </Row>
@@ -35,4 +35,4 @@ const TopSection = () => {
     );
 };
 
-export default memo(TopSection); 
+export default memo(TopSection);

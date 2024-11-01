@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import style from '../../assets/style/banner.module.css';
 import Button from '../../components/Button/Button';
+import Heading from '../../components/Typography/Heading1';
 
 const Banner = () => {
     return (
@@ -9,7 +10,8 @@ const Banner = () => {
             <Container>
                 <Row>
                     <Col className="text-center">
-                        <h2 className='mt-4 mb-4 text-white'>Get started with Task Management System today</h2>
+                    <Heading level={2} text="Get started with Task Management System today"  className='mt-4 mb-4 text-white' />
+                      
                         <Button className={`mt-4 mb-4 ${style.btn_register}`}>
                             Register Now!
                         </Button>

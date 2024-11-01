@@ -1,6 +1,6 @@
-
 import React, { memo } from 'react';
-import Heading from '../../components/Typography/Heading1'; 
+import Heading from '../../components/Typography/Heading1';
+import Image from '../../components/Image/Images'; 
 import OurProductApp from '../../assets/images/Product_Management_Playbook_2x.webp';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -18,11 +18,11 @@ const Reson = () => {
                         </p>
                     </Col>
                     <Col md={5}> 
-                        <img 
+                        <Image 
                             src={OurProductApp} 
                             alt="Product Management App" 
-                            className='img-fluid w-75 circular-animation rounded-circle' 
-                            loading="lazy" 
+                            className="w-75 circular-animation rounded-circle"
+                            responsive // Applies Bootstrap's img-fluid for responsiveness
                         />
                     </Col>
                 </Row>
@@ -31,4 +31,4 @@ const Reson = () => {
     );
 }
 
-export default memo(Reson); 
+export default memo(Reson);
