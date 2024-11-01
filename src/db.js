@@ -58,8 +58,11 @@ export const deleteTaskFromDB = async (taskId) => {
 
 // Function to update an existing task
 export const updateTaskInDB = async (updatedTask) => {
-    const db = await openDatabase();
-    const transaction = db.transaction(TASK_STORE_NAME , "readwrite");
-    const store = transaction.objectStore(TASK_STORE_NAME );
-    await store.put(updatedTask); // Use put() to update existing task or add if it doesn't exist
+    const db = await initDB();
+    const tx = db.transaction(TASK_STORE_NAME, 'readwrite');
+    const store = tx.objectStore(TASK_STORE_NAME);
+    
+    // Use put() to update existing task or add if it doesn't exist
+    await store.put(updatedTask); 
+    await tx.done; // Ensure the transaction completes
 };

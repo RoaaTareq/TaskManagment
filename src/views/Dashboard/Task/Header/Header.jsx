@@ -1,24 +1,26 @@
-// TaskHeader.js
 import React, { useState, useEffect, useCallback } from "react";
 import Button from "../../../../components/Button/Button";
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
-import Filter from '../FilterandSorting/Filter'
 import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
+
 const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
     const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
-
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
     useEffect(() => {
         const loadTasksFromDB = async () => {
+            setLoading(true);
             try {
                 const dbTasks = await getTasks();
-                setTasks((prev) => ({
-                    ...prev,
-                    todo: dbTasks, 
-                }));
+                setTasks({ todo: dbTasks, inProgress: [], done: [] });
             } catch (error) {
                 console.error("Failed to load tasks from IndexedDB:", error);
+                setError("Failed to load tasks. Please try again later.");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -33,22 +35,17 @@ const TaskHeader = () => {
         setShowForm(prev => !prev);
     }, []);
 
-  
     const addTask = useCallback(async (task) => {
         try {
-            console.log("Saving task to IndexedDB:", task); 
             await saveTaskToDB(task); 
-
-            
             setTasks(prevTasks => ({
                 ...prevTasks,
                 todo: [...prevTasks.todo, task], 
             }));
-            
             setShowForm(false); 
-            console.log("Task saved successfully!"); 
         } catch (error) {
             console.error("Failed to save task to IndexedDB:", error);
+            setError("Failed to save task. Please try again.");
         }
     }, []);
 
@@ -59,15 +56,18 @@ const TaskHeader = () => {
                     <h1>Task Management</h1>
                     <Button onClick={toggleForm}>Create Task +</Button>
                 </div>
-              
+                
+                {loading && <p>Loading tasks...</p>}
+                {error && <p className="error">{error}</p>}
+
                 {showForm && (
                     <div className="mt-3">
                         <TaskForm onSubmit={addTask} onCancel={handleCancel} />
                     </div>
                 )}
             </div>
-            <Filter/>
-            <Board tasks={tasks} setTasks={setTasks} />
+            
+            <Board setTasks={setTasks} tasks={tasks} />
         </section>
     );
 };
