@@ -1,28 +1,54 @@
-import React, { useState, useCallback } from "react";
+// TaskHeader.js
+import React, { useState, useEffect, useCallback } from "react";
 import Button from "../../../../components/Button/Button";
-import TaskForm from "../Models/CreateTask"; 
-import Board from "../BoardTask/Board"; 
-
+import TaskForm from "../Models/CreateTask";
+import Board from "../BoardTask/Board";
+import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
 const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
     const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
 
-  
+    useEffect(() => {
+        const loadTasksFromDB = async () => {
+            try {
+                const dbTasks = await getTasks();
+                setTasks((prev) => ({
+                    ...prev,
+                    todo: dbTasks, 
+                }));
+            } catch (error) {
+                console.error("Failed to load tasks from IndexedDB:", error);
+            }
+        };
+
+        loadTasksFromDB();
+    }, []);
+
     const handleCancel = () => {
         setShowForm(false); 
     };
-    
+
     const toggleForm = useCallback(() => {
         setShowForm(prev => !prev);
     }, []);
 
-    
-    const addTask = useCallback((task) => {
-        setTasks(prevTasks => ({
-            ...prevTasks,
-            todo: [...prevTasks.todo, task], 
-        }));
-        setShowForm(false); 
+  
+    const addTask = useCallback(async (task) => {
+        try {
+            console.log("Saving task to IndexedDB:", task); 
+            await saveTaskToDB(task); 
+
+            
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                todo: [...prevTasks.todo, task], 
+            }));
+            
+            setShowForm(false); 
+            console.log("Task saved successfully!"); 
+        } catch (error) {
+            console.error("Failed to save task to IndexedDB:", error);
+        }
     }, []);
 
     return (
