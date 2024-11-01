@@ -17,10 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<Register />} />
-        <Route path="/sign-in" element={ <Login />} />
+        <Route path="/sign-in" element={<Login />} />
+        {/* Protect the dashboard route */}
         <Route
           path="/dashboard/*"
-          element={loggedInUser ? <MainSidebar /> : <Navigate to="/dashboard/*" />}
+          element={loggedInUser ? <MainSidebar /> : <Navigate to="/sign-in" />}
         />
       </Routes>
       <MainFooter />

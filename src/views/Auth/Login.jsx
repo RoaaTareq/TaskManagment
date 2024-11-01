@@ -30,7 +30,7 @@ const Login = () => {
                 if (user) {
                    
                     localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
-                    navigate('/dashboard'); 
+                    navigate('/dashboard/task'); 
                 } else {
                     setErrors({ api: 'Invalid email or password' });
                 }

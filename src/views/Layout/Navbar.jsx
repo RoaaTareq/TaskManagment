@@ -15,7 +15,7 @@ const MainNavbar = () => {
     // Set up conditional navigation links
     const navLinks = loggedInUser
         ? [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Dashboard', href: '/dashboard/' },
             { label: 'Logout', href: '/', onClick: handleLogout } // Attach onClick directly
         ]
         : [
