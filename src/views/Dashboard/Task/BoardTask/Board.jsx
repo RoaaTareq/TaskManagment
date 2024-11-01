@@ -5,7 +5,6 @@ import { deleteTaskFromDB } from '../../../../db';
 import Filter from '../FilterandSorting/Filter';
 import EditTaskForm from '../Models/Edittask';
 
-// Define item types for dragging
 const ItemTypes = {
     TASK: 'task',
 };
@@ -20,8 +19,32 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
         }),
     });
 
+    // Determine background color based on task priority
+    const getBackgroundColor = (priority) => {
+        switch (priority) {
+            case 'high':
+                return '#f0a4a4'; // High priority - red
+            case 'medium':
+                return 'orange'; // Medium priority - orange
+            case 'low':
+                return '#cdf0cd'; // Low priority - green
+            default:
+                return 'white'; // Default background color
+        }
+    };
+
     return (
-        <div ref={drag} className='drag-card' style={{ opacity: isDragging ? 0.5 : 1 }}>
+        <div
+            ref={drag}
+            className='drag-card'
+            style={{
+                opacity: isDragging ? 0.5 : 1,
+                backgroundColor: getBackgroundColor(task.priority), // Apply the background color
+                padding: '10px', // Add some padding for better appearance
+                borderRadius: '5px', // Optional: Add some border radius
+                marginBottom: '10px' // Space between cards
+            }}
+        >
             <div className="task-actions d-flex justify-content-end">
                 <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
                 <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
@@ -37,7 +60,7 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
     );
 };
 
-// Column component to hold tasks
+
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
         accept: ItemTypes.TASK,
@@ -64,7 +87,6 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     );
 };
 
-// Main Board component
 const Board = ({ tasks, setTasks }) => {
     const [filterPriority, setFilterPriority] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -104,7 +126,7 @@ const Board = ({ tasks, setTasks }) => {
             return; // Early return if there's no current task
         }
 
-        // Update task in state
+        // Updating task in state
         setTasks((prevTasks) => {
             const currentColumnTasks = prevTasks[currentTask.columnId] || [];
             const updatedTasks = currentColumnTasks.map((task) =>
@@ -122,13 +144,12 @@ const Board = ({ tasks, setTasks }) => {
         setCurrentTask(null);
     };
 
-    // Filter tasks based on priority and date
     const filteredTasks = (columnTasks) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
-            const taskStartDate = new Date(task.startDate);
-            const matchesDate = (startDate ? taskStartDate >= new Date(startDate) : true) &&
-                                (endDate ? taskStartDate <= new Date(endDate) : true);
+            const taskDate = new Date(task.date);
+            const matchesDate = (startDate ? taskDate >= new Date(startDate) : true) &&
+                                (endDate ? taskDate <= new Date(endDate) : true);
             return matchesPriority && matchesDate;
         });
     };
@@ -139,8 +160,6 @@ const Board = ({ tasks, setTasks }) => {
                 setFilterPriority={setFilterPriority} 
                 setStartDate={setStartDate} 
                 setEndDate={setEndDate} 
-                startDate={startDate}
-                endDate={endDate}
             />
             <DndProvider backend={HTML5Backend}>
                 <section>
