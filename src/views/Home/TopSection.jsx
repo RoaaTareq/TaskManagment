@@ -5,8 +5,9 @@ import Image from '../../components/Image/Images';
 import '../../assets/style/home.css';
 import Button from '../../components/Button/Button';
 import MainImage from '../../assets/video/ai-service-management-platform.png';
-
+import { useTranslation } from 'react-i18next';
 const TopSection = () => {
+    const { t } = useTranslation();
     return (
         <section className='Main_section'>
             <Container>
@@ -14,11 +15,11 @@ const TopSection = () => {
                     <Col md={6}>
                         <Heading 
                             level={1} 
-                            text="Welcome to My Website, Start Organizing Tasks with a Smooth Experience" 
+                            text={t('maintext')} 
                             className="text-white" 
                         />
                         <Button className='mt-4 mb-4 btn_registe'>
-                            Register Now!
+                           {t('registernow')}
                         </Button>
                     </Col>
                     <Col md={6}>

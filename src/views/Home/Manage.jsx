@@ -4,8 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Heading from '../../components/Typography/Heading1';
 import Image from '../../components/Image/Images'; 
 import Manage from '../../assets/images/UI_Illo__Workspace_Views_2x.webp';
-
+import { useTranslation } from 'react-i18next';
 const Management = () => {
+    const { t } = useTranslation();
     return (
         <section className='section-padding manage-section'>
             <Container>
@@ -20,11 +21,9 @@ const Management = () => {
                         />
                     </Col>
                     <Col md={6}>
-                        <Heading level={3} text="Why Use This System" />
+                        <Heading level={3} text={t('why')} />
                         <p className='text-direction'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat consequuntur eum illo doloremque impedit, accusantium nobis aspernatur, aliquid, et voluptatibus aliquam officia accusamus! Sit illum ipsam culpa modi ex.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat consequuntur eum illo doloremque impedit, accusantium nobis aspernatur, aliquid, et voluptatibus aliquam officia accusamus! Sit illum ipsam culpa modi ex.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quaerat consequuntur eum illo doloremque impedit, accusantium nobis aspernatur, aliquid, et voluptatibus aliquam officia accusamus! Sit illum ipsam culpa modi ex.
+                          {t('text-why')}
                         </p>
                     </Col>
                 </Row>

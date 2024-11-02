@@ -1,14 +1,15 @@
 import React from 'react';
 import Footer from '../../components/Layout/Footer'; 
-
+import { useTranslation } from 'react-i18next';
 const MainFooter = () => {
+    const { t } = useTranslation();
   
 
    
 
     return (
        
-                <Footer copyright="2024 © Copyright Task Mangement System"  />
+                <Footer copyright={t('copy')}  />
           
     );
 };
