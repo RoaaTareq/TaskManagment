@@ -5,8 +5,10 @@ import { addUser } from '../../db';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button'; 
 import '../../assets/style/form.css';
+import { useTranslation } from 'react-i18next';
 
 const RegisterForm = () => {
+    const { t } = useTranslation();
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -43,10 +45,10 @@ const RegisterForm = () => {
             <div className='container'>
                 {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
                 <form onSubmit={formik.handleSubmit} className='register-form' noValidate>
-                    <h3 className='text-center'>Register to use the system</h3>
+                    <h3 className='text-center'>{t('register-title')}</h3>
                     
                     <div>
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name">{t('username')}:</label>
                         <Input
                             id="name"
                             type="text"
@@ -54,7 +56,7 @@ const RegisterForm = () => {
                             value={formik.values.name}
                             onChange={formik.handleChange} 
                             onBlur={formik.handleBlur} 
-                            placeholder="Enter your name"
+                            placeholder={t('enter-username')}
                         />
                         {formik.touched.name && formik.errors.name && (
                             <p className='alert-text'>{formik.errors.name}</p>
@@ -62,7 +64,7 @@ const RegisterForm = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">{t('email')}:</label>
                         <Input
                             id="email"
                             type="email"
@@ -70,7 +72,7 @@ const RegisterForm = () => {
                             value={formik.values.email}
                             onChange={formik.handleChange} 
                             onBlur={formik.handleBlur} 
-                            placeholder="Enter your email"
+                            placeholder={t('enter-email')}
                         />
                         {formik.touched.email && formik.errors.email && (
                             <p className='alert-text'>{formik.errors.email}</p>
@@ -78,7 +80,7 @@ const RegisterForm = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">{t('password')}:</label>
                         <Input
                             id="password"
                             type="password"
@@ -86,7 +88,7 @@ const RegisterForm = () => {
                             value={formik.values.password}
                             onChange={formik.handleChange} 
                             onBlur={formik.handleBlur} 
-                            placeholder="Enter your password"
+                            placeholder={t('enter-password')}
                         />
                         {formik.touched.password && formik.errors.password && (
                             <p className='alert-text'>{formik.errors.password}</p>
@@ -94,7 +96,7 @@ const RegisterForm = () => {
                     </div>
 
                     <Button type="submit" disabled={formik.isSubmitting}>
-                        Register
+                    {t('register')}
                     </Button>
                 </form>
             </div>

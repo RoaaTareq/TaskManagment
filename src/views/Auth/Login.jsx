@@ -4,11 +4,13 @@ import * as Yup from 'yup';
 import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input'; 
-import Button from '../../components/Button/Button'; 
+import Button from '../../components/Button/Button';
+import { useTranslation } from 'react-i18next'; 
 import '../../assets/style/form.css';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const formik = useFormik({
         initialValues: {
@@ -47,9 +49,9 @@ const Login = () => {
             <div className='container'>
                 {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
                 <form onSubmit={formik.handleSubmit} noValidate className='login-form'>
-                    <h3 className='text-center'>Log in to continue</h3>
+                    <h3 className='text-center'>  {t('login-title')}</h3>
                     <div>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">{t('email')}:</label>
                         <Input
                             id="email"
                             type="email"
@@ -57,7 +59,7 @@ const Login = () => {
                             value={formik.values.email}
                             onChange={formik.handleChange} 
                             onBlur={formik.handleBlur} 
-                            placeholder="Enter your email"
+                            placeholder={t('enter-email')}
                         />
                         {formik.touched.email && formik.errors.email && (
                             <p className='alert-text'>{formik.errors.email}</p>
@@ -65,7 +67,7 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">{t('password')}</label>
                         <Input
                             id="password"
                             type="password"
@@ -73,7 +75,7 @@ const Login = () => {
                             value={formik.values.password}
                             onChange={formik.handleChange} 
                             onBlur={formik.handleBlur} 
-                            placeholder="Enter your password"
+                            placeholder={t('enter-password')}
                         />
                         {formik.touched.password && formik.errors.password && (
                             <p className='alert-text'>{formik.errors.password}</p>
@@ -81,7 +83,7 @@ const Login = () => {
                     </div>
 
                     <Button type="submit" disabled={formik.isSubmitting}>
-                        Login
+                    {t('login')}
                     </Button>
                 </form>
             </div>
