@@ -9,4 +9,7 @@
     background: rgb(6 8 110) !important;
     box-shadow: inset 0 -4px 0 rgb(6 8 110) !important;
   }
-  
+  .reset-button{
+    font-size: 25px;
+    cursor: pointer;
+  }

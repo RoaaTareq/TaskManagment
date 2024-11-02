@@ -1,14 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../../../components/Input/Input';
 import Select from '../../../../components/DropDown/Select';
 import Button from '../../../../components/Button/Button';
 import Textarea from '../../../../components/Textarea/textarea';
-import '../../../../assets/style/form.css'
+import '../../../../assets/style/form.css';
 
-const TaskForm = ({ onSubmit, onCancel }) => {
-    const formRef = useRef(null); // Reference to the form container
+const TaskForm = React.memo(({ onSubmit, onCancel }) => {
+    const formRef = useRef(null);
 
     const priorityOptions = [
         { label: 'High', value: 'High' },
@@ -16,7 +16,6 @@ const TaskForm = ({ onSubmit, onCancel }) => {
         { label: 'Low', value: 'Low' },
     ];
 
-    // Yup validation schema
     const validationSchema = Yup.object({
         startDate: Yup.date()
             .required('Start Date is required')
@@ -29,7 +28,6 @@ const TaskForm = ({ onSubmit, onCancel }) => {
         description: Yup.string().required('Description is required'),
     });
 
-    // Formik hook
     const formik = useFormik({
         initialValues: {
             startDate: '',
@@ -38,31 +36,35 @@ const TaskForm = ({ onSubmit, onCancel }) => {
             description: '',
         },
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: useCallback((values) => {
             onSubmit(values);
-        },
+        }, [onSubmit]), // Memoize the submit handler
     });
 
-    // Close the form if clicked outside of the form container
+    const handleClickOutside = useCallback((event) => {
+        if (formRef.current && !formRef.current.contains(event.target)) {
+            onCancel();
+        }
+    }, [onCancel]);
+
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (formRef.current && !formRef.current.contains(event.target)) {
-                onCancel(); // Close the form when clicking outside
-            }
-        };
-
         document.addEventListener('mousedown', handleClickOutside);
-
-        // Cleanup event listener on component unmount
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [onCancel]);
+    }, [handleClickOutside]);
+
+    const renderError = (field) => (
+        formik.errors[field] && formik.touched[field] ? (
+            <div className="alert-text">{formik.errors[field]}</div>
+        ) : null
+    );
 
     return (
         <div ref={formRef}>
             <form onSubmit={formik.handleSubmit} className="task-form">
                 <h5>Create task</h5>
+
                 <Input
                     type="date"
                     name="startDate"
@@ -70,10 +72,8 @@ const TaskForm = ({ onSubmit, onCancel }) => {
                     onChange={formik.handleChange}
                     placeholder="Start Date"
                 />
-                {formik.errors.startDate && formik.touched.startDate && (
-                    <div className="alert-text">{formik.errors.startDate}</div>
-                )}
-                
+                {renderError('startDate')}
+
                 <Input
                     type="date"
                     name="endDate"
@@ -81,10 +81,8 @@ const TaskForm = ({ onSubmit, onCancel }) => {
                     onChange={formik.handleChange}
                     placeholder="End Date"
                 />
-                {formik.errors.endDate && formik.touched.endDate && (
-                    <div className="alert-text">{formik.errors.endDate}</div>
-                )}
-                
+                {renderError('endDate')}
+
                 <Select
                     options={priorityOptions}
                     value={formik.values.priority}
@@ -92,43 +90,41 @@ const TaskForm = ({ onSubmit, onCancel }) => {
                     name="priority"
                     placeholder="Select Priority"
                 />
-                {formik.errors.priority && formik.touched.priority && (
-                    <div className="alert-text">{formik.errors.priority}</div>
-                )}
-                
+                {renderError('priority')}
+
                 <Textarea
                     name="description"
                     value={formik.values.description}
                     onChange={formik.handleChange}
                     placeholder="Description"
-                    error={formik.errors.description && formik.touched.description ? formik.errors.description : ''}
+                    error={renderError('description')}
                     rows={5}
                     className="mt-4 mb-4"
                 />
-                
-                <Button 
-                    type="submit" 
-                    variant="primary" 
-                    size="lg" 
+
+                <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
                     className="mt-2"
                     isDisabled={formik.isSubmitting}
                     isLoading={formik.isSubmitting}
                 >
                     Submit Task
                 </Button>
-                
-                <Button 
-                    type="button" 
-                    variant="secondary" 
-                    size="lg" 
-                    className="mt-2" 
-                    onClick={onCancel} // Close form when Cancel is clicked
+
+                <Button
+                    type="button"
+                    variant="secondary"
+                    size="lg"
+                    className="mt-2"
+                    onClick={onCancel}
                 >
                     Cancel
                 </Button>
             </form>
         </div>
     );
-};
+});
 
 export default TaskForm;

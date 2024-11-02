@@ -1,13 +1,10 @@
-
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 import { addUser } from '../../db'; 
-
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button'; 
-import '../../assets/style/form.css'
+import '../../assets/style/form.css';
 
 const RegisterForm = () => {
     const formik = useFormik({
@@ -25,33 +22,33 @@ const RegisterForm = () => {
                 .min(6, 'Password must be at least 6 characters')
                 .required('Password is required'),
         }),
-        onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
-           
+        onSubmit: useCallback(async (values, { setSubmitting, resetForm, setErrors }) => {
+            setErrors({}); // Clear previous API errors
+
             try {
                 const id = await addUser(values); 
                 if (id) {
-                  
-                    resetForm(); 
+                    resetForm();
                 }
             } catch (error) {
                 setErrors({ api: 'Registration failed. Please try again.' });
-                
             } finally {
                 setSubmitting(false);
             }
-        },
+        }, []), 
     });
 
     return (
         <section className='register-section'>
             <div className='container'>
-               
                 {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
                 <form onSubmit={formik.handleSubmit} className='register-form' noValidate>
-                <h3 className='text-center'>Register in to use system</h3>
+                    <h3 className='text-center'>Register to use the system</h3>
+                    
                     <div>
-                        <label>Name:</label>
+                        <label htmlFor="name">Name:</label>
                         <Input
+                            id="name"
                             type="text"
                             name="name"
                             value={formik.values.name}
@@ -64,9 +61,10 @@ const RegisterForm = () => {
                         )}
                     </div>
 
-                    <div >
-                        <label>Email:</label>
+                    <div>
+                        <label htmlFor="email">Email:</label>
                         <Input
+                            id="email"
                             type="email"
                             name="email"
                             value={formik.values.email}
@@ -79,9 +77,10 @@ const RegisterForm = () => {
                         )}
                     </div>
 
-                    <div >
-                        <label>Password:</label>
+                    <div>
+                        <label htmlFor="password">Password:</label>
                         <Input
+                            id="password"
                             type="password"
                             name="password"
                             value={formik.values.password}
@@ -94,7 +93,7 @@ const RegisterForm = () => {
                         )}
                     </div>
 
-                    <Button type="submit"  disabled={formik.isSubmitting}>
+                    <Button type="submit" disabled={formik.isSubmitting}>
                         Register
                     </Button>
                 </form>

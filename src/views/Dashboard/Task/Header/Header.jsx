@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Button from "react-bootstrap/Button"; 
+import Heading from "../../../../components/Typography/Heading1";
 import Alert from "react-bootstrap/Alert"; 
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
 import { addTask as saveTaskToDB, getTasksByUserId, updateTaskInDB } from "../../../../db"; 
+import { Container } from "react-bootstrap";
 
 const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
@@ -11,17 +13,16 @@ const TaskHeader = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    // Fetch tasks from IndexedDB
     const loadTasksFromDB = useCallback(async () => {
         setLoading(true);
         const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
         if (!loggedInUser) {
             setLoading(false);
-            return; // Exit if no user is logged in
+            return; 
         }
-        const userId = loggedInUser.id; // Get userId from localStorage
+
         try {
-            const dbTasks = await getTasksByUserId(userId); // Fetch tasks by userId
+            const dbTasks = await getTasksByUserId(loggedInUser.id); 
             setTasks({ todo: dbTasks, inProgress: [], done: [] });
         } catch (error) {
             console.error("Failed to load tasks from IndexedDB:", error);
@@ -44,12 +45,11 @@ const TaskHeader = () => {
     }, []);
 
     const addTask = useCallback(async (task) => {
-        try {
-            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-            if (!loggedInUser) return; 
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (!loggedInUser) return; 
 
-            const userId = loggedInUser.id; 
-            await saveTaskToDB({ ...task, userId }); 
+        try {
+            await saveTaskToDB({ ...task, userId: loggedInUser.id }); 
             await loadTasksFromDB(); // Reload tasks after adding a new one
             setShowForm(false); 
         } catch (error) {
@@ -58,11 +58,10 @@ const TaskHeader = () => {
         }
     }, [loadTasksFromDB]);
 
-    // Function to handle task updates
     const updateTask = useCallback(async (updatedTask) => {
         try {
-            await updateTaskInDB(updatedTask); // Update task in the database
-            await loadTasksFromDB(); // Reload tasks after updating
+            await updateTaskInDB(updatedTask); 
+            await loadTasksFromDB(); 
         } catch (error) {
             console.error("Failed to update task in IndexedDB:", error);
             setError("Failed to update task. Please try again.");
@@ -71,9 +70,9 @@ const TaskHeader = () => {
 
     return (
         <section>
-            <div className="container">
+            <Container className="container">
                 <div className="d-flex justify-content-between mt-4 mb-4">
-                    <h1>Task Management</h1>
+                <Heading level={1} text="Task Managment"  />
                     <Button className="create-task" onClick={toggleForm}>Add Task +</Button>
                 </div>
                 
@@ -85,9 +84,9 @@ const TaskHeader = () => {
                         <TaskForm onSubmit={addTask} onCancel={handleCancel} />
                     </div>
                 )}
-            </div>
+            </Container>
             
-            <Board setTasks={setTasks} tasks={tasks} onUpdateTask={updateTask} /> {/* Pass update function to Board */}
+            <Board setTasks={setTasks} tasks={tasks} onUpdateTask={updateTask} /> 
         </section>
     );
 };

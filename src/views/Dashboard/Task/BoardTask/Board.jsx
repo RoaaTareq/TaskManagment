@@ -181,9 +181,11 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
     return (
         <>
             <Filter 
-                setFilterPriority={setFilterPriority} 
-                setStartDate={setStartDate} 
-                setEndDate={setEndDate} 
+                setFilterPriority={setFilterPriority}
+                setStartDate={setStartDate}
+                setEndDate={setEndDate}
+                startDate={startDate}
+                endDate={endDate}
             />
             <DndProvider backend={HTML5Backend}>
                 <section>

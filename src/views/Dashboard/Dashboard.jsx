@@ -7,8 +7,7 @@ const Dashboard = () => {
 
     return (
         <div class="wrapper">
-        
-         
+                
        <MainSidebar/>
        
       </div>

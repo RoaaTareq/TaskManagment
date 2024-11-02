@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { getUserByEmailAndPassword } from '../../db';
@@ -22,16 +22,15 @@ const Login = () => {
             password: Yup.string()
                 .required('Password is required'),
         }),
-        onSubmit: async (values, { setSubmitting, setErrors }) => {
-            setErrors({}); 
+        onSubmit: useCallback(async (values, { setSubmitting, setErrors }) => {
+            setErrors({});
 
             try {
                 const user = await getUserByEmailAndPassword(values.email, values.password);
                 if (user) {
-                    
                     localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
-                    localStorage.setItem('userId', user.id); 
-                    navigate('/dashboard/task'); 
+                    localStorage.setItem('userId', user.id);
+                    navigate('/dashboard');
                 } else {
                     setErrors({ api: 'Invalid email or password' });
                 }
@@ -40,7 +39,7 @@ const Login = () => {
             } finally {
                 setSubmitting(false);
             }
-        },
+        }, [navigate]),
     });
 
     return (
@@ -50,8 +49,9 @@ const Login = () => {
                 <form onSubmit={formik.handleSubmit} noValidate className='login-form'>
                     <h3 className='text-center'>Log in to continue</h3>
                     <div>
-                        <label>Email:</label>
+                        <label htmlFor="email">Email:</label>
                         <Input
+                            id="email"
                             type="email"
                             name="email"
                             value={formik.values.email}
@@ -65,8 +65,9 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label>Password:</label>
+                        <label htmlFor="password">Password:</label>
                         <Input
+                            id="password"
                             type="password"
                             name="password"
                             value={formik.values.password}

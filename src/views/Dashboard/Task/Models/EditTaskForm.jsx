@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'; // Ensure useRef is imported
+import React, { useRef, useEffect, useCallback } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../../../components/Input/Input';
@@ -6,10 +6,10 @@ import Select from '../../../../components/DropDown/Select';
 import Button from '../../../../components/Button/Button';
 import Textarea from '../../../../components/Textarea/textarea';
 import '../../../../assets/style/form.css';
-import { updateTaskInDB } from '../../../../db'; // Ensure correct import path for your db functions
+import { updateTaskInDB } from '../../../../db';
 
-const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
-    const formRef = useRef(null); // Reference to the form container
+const EditTaskForm = React.memo(({ onSubmit, onCancel, initialValues }) => {
+    const formRef = useRef(null);
 
     const priorityOptions = [
         { label: 'High', value: 'high' },
@@ -17,7 +17,6 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
         { label: 'Low', value: 'low' },
     ];
 
-    // Yup validation schema
     const validationSchema = Yup.object({
         startDate: Yup.date()
             .required('Start Date is required')
@@ -30,49 +29,46 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
         description: Yup.string().required('Description is required'),
     });
 
-    // Formik hook with initial values
     const formik = useFormik({
         initialValues: initialValues || {
             startDate: '',
             endDate: '',
             priority: '',
             description: '',
-            id: '', // Ensure ID is included for updating the task
+            id: '',
         },
         validationSchema,
         onSubmit: async (values) => {
             try {
-                console.log("Submitting task with ID:", values.id); // Debugging line
-                const userId = JSON.parse(localStorage.getItem('loggedInUser')).id; // Get userId from local storage
-                await updateTaskInDB({ ...values, userId }); // Include userId while updating
-                onSubmit(values); // Call parent onSubmit to update UI
+              
+                const userId = JSON.parse(localStorage.getItem('loggedInUser')).id;
+                await updateTaskInDB({ ...values, userId });
+                onSubmit(values);
             } catch (error) {
                 console.error("Error updating task:", error);
-                // Handle error appropriately
+                
             }
         },
     });
 
-    // Close the form if clicked outside of the form container
+    const handleClickOutside = useCallback((event) => {
+        if (formRef.current && !formRef.current.contains(event.target)) {
+            onCancel();
+        }
+    }, [onCancel]);
+
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (formRef.current && !formRef.current.contains(event.target)) {
-                onCancel(); // Close the form when clicking outside
-            }
-        };
-
         document.addEventListener('mousedown', handleClickOutside);
-
-        // Cleanup event listener on component unmount
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [onCancel]);
+    }, [handleClickOutside]);
 
     return (
         <div ref={formRef}>
             <form onSubmit={formik.handleSubmit} className="task-edit">
                 <h5>Edit Task</h5>
+
                 <Input
                     type="date"
                     name="startDate"
@@ -83,7 +79,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                 {formik.errors.startDate && formik.touched.startDate && (
                     <div className="alert-text">{formik.errors.startDate}</div>
                 )}
-                
+
                 <Input
                     type="date"
                     name="endDate"
@@ -94,7 +90,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                 {formik.errors.endDate && formik.touched.endDate && (
                     <div className="alert-text">{formik.errors.endDate}</div>
                 )}
-                
+
                 <Select
                     options={priorityOptions}
                     value={formik.values.priority}
@@ -105,7 +101,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                 {formik.errors.priority && formik.touched.priority && (
                     <div className="alert-text">{formik.errors.priority}</div>
                 )}
-                
+
                 <Textarea
                     name="description"
                     value={formik.values.description}
@@ -115,7 +111,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                     rows={5}
                     className="mt-4 mb-4"
                 />
-                
+
                 <Button 
                     type="submit" 
                     variant="primary" 
@@ -132,13 +128,13 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                     variant="secondary" 
                     size="lg" 
                     className="mt-2" 
-                    onClick={onCancel} // Close form when Cancel is clicked
+                    onClick={onCancel}
                 >
                     Cancel
                 </Button>
             </form>
         </div>
     );
-};
+});
 
 export default EditTaskForm;
