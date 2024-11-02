@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -6,8 +5,7 @@ import { getUserByEmailAndPassword } from '../../db';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input'; 
 import Button from '../../components/Button/Button'; 
- 
-import '../../assets/style/form.css'
+import '../../assets/style/form.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -25,19 +23,19 @@ const Login = () => {
                 .required('Password is required'),
         }),
         onSubmit: async (values, { setSubmitting, setErrors }) => {
-            setErrors({}); // Clear previous errors
+            setErrors({}); 
 
             try {
                 const user = await getUserByEmailAndPassword(values.email, values.password);
                 if (user) {
-                   
+                    
                     localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, id: user.id }));
+                    localStorage.setItem('userId', user.id); 
                     navigate('/dashboard/task'); 
                 } else {
                     setErrors({ api: 'Invalid email or password' });
                 }
             } catch (error) {
-               
                 setErrors({ api: 'Login failed' });
             } finally {
                 setSubmitting(false);
@@ -48,7 +46,6 @@ const Login = () => {
     return (
         <section className='login-section'>
             <div className='container'>
-               
                 {formik.errors.api && <p className='alert alert-danger'>{formik.errors.api}</p>}
                 <form onSubmit={formik.handleSubmit} noValidate className='login-form'>
                     <h3 className='text-center'>Log in to continue</h3>
@@ -58,8 +55,8 @@ const Login = () => {
                             type="email"
                             name="email"
                             value={formik.values.email}
-                            onChange={formik.handleChange} // Handle email input
-                            onBlur={formik.handleBlur} // Handle blur for validation
+                            onChange={formik.handleChange} 
+                            onBlur={formik.handleBlur} 
                             placeholder="Enter your email"
                         />
                         {formik.touched.email && formik.errors.email && (
@@ -67,7 +64,7 @@ const Login = () => {
                         )}
                     </div>
 
-                    <div >
+                    <div>
                         <label>Password:</label>
                         <Input
                             type="password"
@@ -82,7 +79,7 @@ const Login = () => {
                         )}
                     </div>
 
-                    <Button type="submit"  disabled={formik.isSubmitting}>
+                    <Button type="submit" disabled={formik.isSubmitting}>
                         Login
                     </Button>
                 </form>
