@@ -56,6 +56,10 @@ margin:0 12px;
   .header-task{
     flex-direction: column;
   }
+  .section-padding {
+    padding: 20px;
+  }
+  
 }
 
 .custom-table th, .custom-table td {

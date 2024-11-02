@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './views/Home/Home';
@@ -7,18 +8,18 @@ import Register from './views/Auth/Register';
 import Login from './views/Auth/Login';
 import MainSidebar from './views/Dashboard/Layout/MainSidebar';
 import NotFound from './views/Error/NotFound';
-import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AppProviders from './context/AppProviders';
 import './i18n';
 
 function App() {
   return (
-    <AuthProvider>
+    <AppProviders>
       <Router>
         <Navbar />
         <MainContent />
       </Router>
-    </AuthProvider>
+    </AppProviders>
   );
 }
 
@@ -46,7 +47,7 @@ function MainContent() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       
-      {/* Render footer only on home page */}
+      
       {location.pathname === '/' && <MainFooter />}
     </>
   );
