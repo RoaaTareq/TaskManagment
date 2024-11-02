@@ -55,7 +55,19 @@ export const deleteTaskFromDB = async (taskId) => {
 
 export const updateTaskInDB = async (task) => {
     const db = await initDB();
-    await db.put(TASK_STORE_NAME, task);
+    console.log("Updating task:", task); // Debugging line
+
+    // Ensure task.id is defined before proceeding
+    if (!task.id) {
+        throw new Error("Task ID is required for updating.");
+    }
+
+    const existingTask = await db.get(TASK_STORE_NAME, task.id); // Get the existing task
+    if (!existingTask) {
+        throw new Error(`Task with ID ${task.id} not found.`);
+    }
+
+    await db.put(TASK_STORE_NAME, { ...existingTask, ...task }); // Update existing task with new values
 };
 
 

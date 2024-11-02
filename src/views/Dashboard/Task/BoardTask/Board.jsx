@@ -3,8 +3,8 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { deleteTaskFromDB } from '../../../../db'; 
 import Filter from '../FilterandSorting/Filter';
-import EditTaskForm from '../Models/Edittask';
-import '../../../../assets/style/dragboard.css'
+import EditTaskForm from '../Models/EditTaskForm';
+import '../../../../assets/style/dragboard.css';
 
 const ItemTypes = {
     TASK: 'task',
@@ -32,7 +32,7 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
         }
     };
 
-    const isOverdue = new Date(task.dueDate) < new Date();
+    const isOverdue = new Date(task.endDate) < new Date();
 
     return (
         <div
@@ -64,16 +64,14 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className='d-flex flex-column'>
-                    <span>🚒{task.priority}</span>
-                    <p>🧾{task.description}</p>
-                    <span> 📅{task.startDate} to {task.endDate}</span>
-                   
+                    <span>🚒 {task.priority}</span>
+                    <p>🧾 {task.description}</p>
+                    <span> 📅 {task.startDate} to {task.endDate}</span>
                 </div>
             </div>
         </div>
     );
 };
-
 
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
@@ -122,12 +120,21 @@ const Board = ({ tasks, setTasks }) => {
     };
 
     const deleteTask = async (task, columnId) => {
-        await deleteTaskFromDB(task.id);
+        const userId = JSON.parse(localStorage.getItem('loggedInUser')).id; // Get the userId from local storage
+    
+        // Check if the task belongs to the current user
+        if (task.userId !== userId) {
+            console.error("User ID does not match. Cannot delete task.");
+            return;
+        }
+    
+        await deleteTaskFromDB(task.id); // Delete from IndexedDB
         setTasks((prevTasks) => ({
             ...prevTasks,
-            [columnId]: prevTasks[columnId].filter((t) => t.id !== task.id),
+            [columnId]: prevTasks[columnId].filter((t) => t.id !== task.id), // Remove from UI state
         }));
     };
+    
 
     const editTask = (task) => {
         setCurrentTask(task);
@@ -159,7 +166,7 @@ const Board = ({ tasks, setTasks }) => {
     const filteredTasks = (columnTasks, columnId) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
-            const taskDate = new Date(task.dueDate);
+            const taskDate = new Date(task.endDate);
             const matchesDate = (startDate ? taskDate >= new Date(startDate) : true) &&
                                 (endDate ? taskDate <= new Date(endDate) : true);
             const isOverdue = taskDate < new Date();
@@ -181,7 +188,7 @@ const Board = ({ tasks, setTasks }) => {
                         <div className="row m-auto justify-content-between mt-4">
                             <Column
                                 title=" 🪜 To Do"
-                                tasks={filteredTasks(tasks.todo, "todo")} // Pass columnId here
+                                tasks={filteredTasks(tasks.todo, "todo")}
                                 moveTask={moveTask}
                                 columnId="todo"
                                 onDelete={deleteTask}
@@ -189,7 +196,7 @@ const Board = ({ tasks, setTasks }) => {
                             />
                             <Column
                                 title=" ⚒️ In Progress"
-                                tasks={filteredTasks(tasks.inProgress, "inProgress")} // Pass columnId here
+                                tasks={filteredTasks(tasks.inProgress, "inProgress")}
                                 moveTask={moveTask}
                                 columnId="inProgress"
                                 onDelete={deleteTask}
@@ -197,7 +204,7 @@ const Board = ({ tasks, setTasks }) => {
                             />
                             <Column
                                 title=" ✅ Done"
-                                tasks={filteredTasks(tasks.done, "done")} // Pass columnId here
+                                tasks={filteredTasks(tasks.done, "done")}
                                 moveTask={moveTask}
                                 columnId="done"
                                 onDelete={deleteTask}

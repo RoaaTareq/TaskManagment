@@ -5,7 +5,7 @@ import Input from '../../../../components/Input/Input';
 import Select from '../../../../components/DropDown/Select';
 import Button from '../../../../components/Button/Button';
 import Textarea from '../../../../components/Textarea/textarea';
-import '../../../../assets/style/form.css'
+import '../../../../assets/style/form.css';
 import { updateTaskInDB } from '../../../../db'; // Ensure correct import path for your db functions
 
 const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
@@ -42,12 +42,13 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
         validationSchema,
         onSubmit: async (values) => {
             try {
-                // Call the update function with the entire task object
-                await updateTaskInDB(values); // Update the task in IndexedDB
-                onSubmit(values); // Call the parent onSubmit to update the UI
+                console.log("Submitting task with ID:", values.id); // Debugging line
+                const userId = JSON.parse(localStorage.getItem('loggedInUser')).id; // Get userId from local storage
+                await updateTaskInDB({ ...values, userId }); // Include userId while updating
+                onSubmit(values); // Call parent onSubmit to update UI
             } catch (error) {
                 console.error("Error updating task:", error);
-                // Handle the error appropriately, e.g., showing a message to the user
+                // Handle error appropriately
             }
         },
     });
@@ -71,7 +72,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
     return (
         <div ref={formRef}>
             <form onSubmit={formik.handleSubmit} className="task-edit">
-                <h5>Edit task</h5>
+                <h5>Edit Task</h5>
                 <Input
                     type="date"
                     name="startDate"
@@ -95,7 +96,7 @@ const EditTaskForm = ({ onSubmit, onCancel, initialValues }) => {
                 )}
                 
                 <Select
-                    options={priorityOptions} // Ensure this is always defined
+                    options={priorityOptions}
                     value={formik.values.priority}
                     onChange={(e) => formik.setFieldValue('priority', e.target.value)}
                     name="priority"
