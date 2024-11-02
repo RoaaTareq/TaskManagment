@@ -3,8 +3,11 @@ import Input from '../../../../components/Input/Input';
 import Button from '../../../../components/Button/Button';
 import { Container, Row, Col } from 'react-bootstrap'; 
 import '../../../../assets/style/customcomponents.css';
+import { useTranslation } from 'react-i18next';
 
 const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startDate, endDate }) => {
+    
+    const { t } = useTranslation();
     const handlePriorityChange = (priority) => {
         setFilterPriority(priority); 
     };
@@ -21,7 +24,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                 <Row className='align-items-center'>
                     <Col xl={6} md={12} xs={12}>
                         <div className="d-flex align-items-center mt-4 mb-4 mobile-direction">
-                            {['High', 'Medium', 'Low'].map(priority => (
+                            {[t('heigh'), t('meduim'), t('low')].map(priority => (
                                 <Button 
                                     key={priority} 
                                     className='filter-btn' 
@@ -34,40 +37,41 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                                 className='filter-btn' 
                                 onClick={() => handlePriorityChange('')}
                             >
-                                All
+                                {t('all')}
                             </Button>
                             
-                            <span 
-                                className='reset-button'
-                                onClick={handleReset}
+                            <Button 
+                                className='reset-button' 
+                                onClick={handleReset} 
+                                variant="light" // Optional for better styling
                             >
                                 🔄️
-                            </span>
+                            </Button>
                         </div>
                     </Col>
                     <Col xl={3} md={12} xs={12} >
                         <div className="d-flex align-items-center">
-                            <label htmlFor="startDate" className='label-form'>Start Date:</label>
+                            <label htmlFor="startDate" className='label-form'>{t('start_date')}:</label>
                             <Input
                                 type="date"
                                 name="startDate"
                                 id="startDate" 
                                 value={startDate || ""}
                                 onChange={(e) => setStartDate(e.target.value)}
-                                className='ml-2'
+                                className='ms-2' // Change to Bootstrap 5 spacing
                             />
                         </div>
                     </Col>
                     <Col xl={3} md={12} xs={12}>
                         <div className='d-flex align-items-center'>
-                            <label htmlFor="endDate" className='label-form'>End Date:</label>
+                            <label htmlFor="endDate" className='label-form'>{t('end_date')}:</label>
                             <Input
                                 type="date"
                                 name="endDate"
                                 id="endDate" 
                                 value={endDate || ""}
                                 onChange={(e) => setEndDate(e.target.value)}
-                                className='ml-2'
+                                className='ms-2' // Change to Bootstrap 5 spacing
                             />
                         </div>
                     </Col>

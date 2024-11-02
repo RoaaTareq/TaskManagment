@@ -35,8 +35,18 @@
     "enter-password":"Enter your password",
     "enter-username":"Enter your username",
     "login-title":"Login now",
-     "register-title":"Register Now !"
-    
+     "register-title":"Register Now !",
+     "todo":"To Do",
+     "progress":"In Progress" ,
+     "done":"Done",
+     "all":"All",
+     "heigh":"Heigh",
+     "low":"Low",
+     "meduim":"Meduim",
+     "startdate":"Start Date",
+     "endsate":"End Date",
+      "addtask":"Add task"  ,
+       "Msnagementtask":"Management Task"
 
 
    

@@ -34,5 +34,17 @@
     "enter-password":" ادخل كلمة السر",
     "login-title":"تسجيل الدخول",
     "enter-username":"ادخل اسم المستخدم",
-    "register-title":"إنشاء حساب جديد"
+    "register-title":"إنشاء حساب جديد",
+    "todo":"الآن",
+    "progress":"قيد العمل" ,
+    "done":"انتهى",
+    "all":"جميع",
+    "heigh":"عالي",
+    "low":"منخفض",
+    "meduim":"متوسط",
+    "startdate":"تاريج البداية",
+    "endsate":"تاريخ النهاية",
+    "addtask":"إضافة تاسك",
+    "Msnagementtask":"ادارة المهام"
+
 }

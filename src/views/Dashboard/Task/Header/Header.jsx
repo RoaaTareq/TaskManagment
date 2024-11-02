@@ -6,8 +6,9 @@ import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
 import { addTask as saveTaskToDB, getTasksByUserId, updateTaskInDB } from "../../../../db"; 
 import { Container } from "react-bootstrap";
-
+import { useTranslation } from 'react-i18next';
 const TaskHeader = () => {
+    const { t } = useTranslation();
     const [showForm, setShowForm] = useState(false);
     const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
     const [loading, setLoading] = useState(true);
@@ -72,8 +73,8 @@ const TaskHeader = () => {
         <section>
             <Container className="container">
                 <div className="d-flex justify-content-between mt-4 mb-4 header-task">
-                <Heading level={1} text="Task Managment"  />
-                    <Button className="create-task" onClick={toggleForm}>Add Task +</Button>
+                <Heading level={1} text={t('Msnagementtask')}  />
+                    <Button className="create-task" onClick={toggleForm}>{t('addtask')}</Button>
                 </div>
                 
                 {loading && <p>Loading tasks...</p>}
