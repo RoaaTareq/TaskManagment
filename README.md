@@ -12,7 +12,6 @@ Create a task board that allows users to assign tasks, set priorities, and defin
 ### 2. Task Details
 - Users can **add**, **edit**, and **delete** task details with ease.
 - Each task can include:
-  - Title
   - Description
   - Priority (e.g., Low, Medium, High)
   - Due Date
