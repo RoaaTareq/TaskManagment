@@ -30,7 +30,10 @@ The project aims to deliver a dynamic task management board that includes:
 - Due date tracking
 
 ## Getting Started
-
+## Library use :
+- formik && yup [validation] .
+- react-i18next for language .
+- others
 ### Prerequisites
 - Node.js (version 14 or above)
 - npm (Node Package Manager)
