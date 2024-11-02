@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { useTranslation } from 'react-i18next';
 
 function LanguageSwitcher() {
     const { i18n } = useTranslation();
-    const location = useLocation();
   
-    // Function to detect language from URL parameter
+  
+    
     useEffect(() => {
       const params = new URLSearchParams(location.search);
       const lang = params.get('lang');
