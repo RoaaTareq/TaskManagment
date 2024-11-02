@@ -1,0 +1,15 @@
+.filter-btn{
+    background-color: rgb(6 8 110) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    width: 250px !important;
+    color: #FFF !important;
+    margin: 0 6px !important;
+    border: none !important;
+    background: rgb(6 8 110) !important;
+    box-shadow: inset 0 -4px 0 rgb(6 8 110) !important;
+  }
+  .reset-button{
+    font-size: 25px;
+    cursor: pointer;
+  }

@@ -1,0 +1,29 @@
+.drag-card{
+    padding: 10px;
+      margin: 5px 0px;
+      background-color: #e3e1ee;
+      cursor: move;
+      height: auto;
+      box-sizing: border-box;
+      box-shadow: 0 2px 5px hsla(220, 6%, 90%, .66), 0 0 8px rgba(228, 231, 236, .3);
+      border-radius: 14px;
+  }
+  .text-descrption{
+    text-align: justify;
+    margin: 20px 0;
+    padding: 10px;
+  }
+  .priority{
+    background-color: #FFF;
+    border-radius: 12px;
+    padding: 12px;
+    color:black;
+  }
+  .board-layout{
+    border:2px dashed grey;
+    margin: 6px;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 100vh;
+    margin: 20px 0;
+  }

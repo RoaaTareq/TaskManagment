@@ -1,0 +1,26 @@
+.sidebar {
+    min-height: 100vh;
+    width: 250px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .sidebar .top {
+    
+    padding-bottom: 10px;
+  }
+  
+  .sidebar .brand span {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .sidebar .nav-link {
+    color: #343a40;
+    padding: 10px;
+  }
+  
+  .sidebar .nav-link:hover {
+    color: #007bff;
+  }

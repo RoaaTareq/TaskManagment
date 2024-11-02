@@ -1,13 +1,59 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Importing Nunito font */
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Global Styling */
+body {
+  font-family: 'Nunito', sans-serif !important;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+.text-direction {
+  text-align: justify;
+}
+
+.section-padding {
+  padding: 80px;
+}
+
+.alert-text {
+  color: red;
+}
+
+/* Background Gradients */
+.footer-bg,
+.sidebar-bg {
+  background: linear-gradient(60deg, rgb(82, 67, 170), rgb(6, 8, 110));
+}
+
+/* Icon Card Styling */
+.icon-card {
+  border: 8px solid rgb(255, 255, 255);
+  border-radius: 0.5rem;
+  height: 3rem !important;
+  width: 3rem !important;
+  margin: 12px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 767px) {
+  .custom-card {
+    margin: 6px 0;
+  }
+}
+
+.custom-table th, .custom-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.custom-table thead {
+  background-color: #007bff;
+  color: white;
 }
