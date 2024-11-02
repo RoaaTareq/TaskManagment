@@ -99,7 +99,7 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     );
 };
 
-const Board = ({ tasks, setTasks }) => {
+const Board = ({ tasks, setTasks ,onUpdateTask }) => {
     const [filterPriority, setFilterPriority] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -141,28 +141,31 @@ const Board = ({ tasks, setTasks }) => {
         setIsEditing(true);
     };
 
-    const handleEditSubmit = (updatedTask) => {
+    const handleEditSubmit = async (updatedTask) => {
         if (!currentTask) {
             console.error("No valid task selected for editing");
             return;
         }
-
+    
         setTasks((prevTasks) => {
             const currentColumnTasks = prevTasks[currentTask.columnId] || [];
             const updatedTasks = currentColumnTasks.map((task) =>
                 task.id === currentTask.id ? { ...task, ...updatedTask } : task
             );
-
+    
             return {
                 ...prevTasks,
                 [currentTask.columnId]: updatedTasks,
             };
         });
-
+        
+        // Ensure that this line is awaited
+        await onUpdateTask({ ...updatedTask, id: currentTask.id, columnId: currentTask.columnId });
+        
         setIsEditing(false);
         setCurrentTask(null);
     };
-
+    
     const filteredTasks = (columnTasks, columnId) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
