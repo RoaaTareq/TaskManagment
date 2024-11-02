@@ -4,8 +4,7 @@ import { openDB } from 'idb';
 const DB_NAME = 'UserDatabase';
 const USER_STORE_NAME = 'users';
 const TASK_STORE_NAME = 'tasks';
-const EMPLOYEE_STORE_NAME = 'employees'; // New store for employees
-const PROJECT_STORE_NAME = 'projects'; // New store for projects
+
 
 export async function initDB() {
     return openDB(DB_NAME, 1, {
@@ -16,12 +15,7 @@ export async function initDB() {
             if (!db.objectStoreNames.contains(TASK_STORE_NAME)) {
                 db.createObjectStore(TASK_STORE_NAME, { keyPath: 'id', autoIncrement: true });
             }
-            if (!db.objectStoreNames.contains(EMPLOYEE_STORE_NAME)) {
-                db.createObjectStore(EMPLOYEE_STORE_NAME, { keyPath: 'id', autoIncrement: true });
-            }
-            if (!db.objectStoreNames.contains(PROJECT_STORE_NAME)) {
-                db.createObjectStore(PROJECT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
-            }
+          
         }
     });
 }
@@ -38,15 +32,19 @@ export async function getUserByEmailAndPassword(email, password) {
     return allUsers.find(user => user.email === email && user.password === password);
 }
 
-// ----- Task Functions -----
+
 export const addTask = async (task) => {
     const db = await initDB();
-    await db.add(TASK_STORE_NAME, task);
+    // Assuming task object includes userId from localStorage
+    const userId = JSON.parse(localStorage.getItem('loggedInUser')).id;
+    await db.add(TASK_STORE_NAME, { ...task, userId });
 };
 
-export const getTasks = async () => {
+
+export const getTasksByUserId = async (userId) => {
     const db = await initDB();
-    return db.getAll(TASK_STORE_NAME);
+    const allTasks = await db.getAll(TASK_STORE_NAME);
+    return allTasks.filter(task => task.userId === userId);
 };
 
 export const deleteTaskFromDB = async (taskId) => {
@@ -54,49 +52,12 @@ export const deleteTaskFromDB = async (taskId) => {
     await db.delete(TASK_STORE_NAME, taskId);
 };
 
+
 export const updateTaskInDB = async (task) => {
     const db = await initDB();
     await db.put(TASK_STORE_NAME, task);
 };
 
-// ----- Employee Functions -----
-// Employee Functions
-export const addEmployee = async (employee) => {
-    const db = await initDB();
-    return db.add(EMPLOYEE_STORE_NAME, employee);
-};
 
-export const getEmployees = async () => {
-    const db = await initDB();
-    return db.getAll(EMPLOYEE_STORE_NAME);
-};
 
-export const deleteEmployee = async (employeeId) => {
-    const db = await initDB();
-    return db.delete(EMPLOYEE_STORE_NAME, employeeId);
-};
 
-export const updateEmployee = async (employee) => {
-    const db = await initDB();
-    return db.put(EMPLOYEE_STORE_NAME, employee);
-};
-// ----- Project Functions -----
-export const addProject = async (project) => {
-    const db = await initDB();
-    return db.add(PROJECT_STORE_NAME, project);
-};
-
-export const getProjects = async () => {
-    const db = await initDB();
-    return db.getAll(PROJECT_STORE_NAME);
-};
-
-export const deleteProject = async (projectId) => {
-    const db = await initDB();
-    await db.delete(PROJECT_STORE_NAME, projectId);
-};
-
-export const updateProject = async (project) => {
-    const db = await initDB();
-    await db.put(PROJECT_STORE_NAME, project);
-};

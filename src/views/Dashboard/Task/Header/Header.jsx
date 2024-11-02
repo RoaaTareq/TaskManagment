@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert"; 
 import TaskForm from "../Models/CreateTask";
 import Board from "../BoardTask/Board";
-import { addTask as saveTaskToDB, getTasks } from "../../../../db"; 
+import { addTask as saveTaskToDB, getTasksByUserId } from "../../../../db"; 
 
 const TaskHeader = () => {
     const [showForm, setShowForm] = useState(false);
@@ -14,8 +14,14 @@ const TaskHeader = () => {
     useEffect(() => {
         const loadTasksFromDB = async () => {
             setLoading(true);
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (!loggedInUser) {
+                setLoading(false);
+                return; // Exit if no user is logged in
+            }
+            const userId = loggedInUser.id; // Get userId from localStorage
             try {
-                const dbTasks = await getTasks();
+                const dbTasks = await getTasksByUserId(userId); // Fetch tasks by userId
                 setTasks({ todo: dbTasks, inProgress: [], done: [] });
             } catch (error) {
                 console.error("Failed to load tasks from IndexedDB:", error);
@@ -24,9 +30,11 @@ const TaskHeader = () => {
                 setLoading(false);
             }
         };
-
+    
         loadTasksFromDB();
     }, []);
+    
+    
 
     const handleCancel = () => {
         setShowForm(false); 
@@ -38,10 +46,14 @@ const TaskHeader = () => {
 
     const addTask = useCallback(async (task) => {
         try {
-            await saveTaskToDB(task); 
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (!loggedInUser) return; 
+    
+            const userId = loggedInUser.id; 
+            await saveTaskToDB({ ...task, userId }); 
             setTasks(prevTasks => ({
                 ...prevTasks,
-                todo: [...prevTasks.todo, task], 
+                todo: [...prevTasks.todo, { ...task, userId }], 
             }));
             setShowForm(false); 
         } catch (error) {
@@ -49,6 +61,7 @@ const TaskHeader = () => {
             setError("Failed to save task. Please try again.");
         }
     }, []);
+    
 
     return (
         <section>
