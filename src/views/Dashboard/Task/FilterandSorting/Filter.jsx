@@ -10,9 +10,9 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
     };
 
     const handleReset = () => {
-        setFilterPriority(''); // Reset priority
-        setStartDate('');     // Reset start date
-        setEndDate('');       // Reset end date
+        setFilterPriority(''); 
+        setStartDate('');     
+        setEndDate('');      
     };
 
     return (
@@ -36,7 +36,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                             >
                                 All
                             </Button>
-                            {/* Reset Button */}
+                            
                             <span 
                                 className='reset-button'
                                 onClick={handleReset}

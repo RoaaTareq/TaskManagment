@@ -59,8 +59,8 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
                 }} />
             )}
             <div className="task-actions d-flex justify-content-end">
-                <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
-                <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
+                <i className="bi bi-pen icon" onClick={() => onEdit(task)}  title="Edit Task" />
+                <i className="bi bi-trash icon" onClick={() => onDelete(task, columnId)}  title="Delete Task" />
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className='d-flex flex-column'>
