@@ -25,7 +25,9 @@
     "integration-text":"Connect the apps already used into your system workflow or add a Power-Up to fine-tune your specific needs.",
     "support-text":"No-code automation is built into every Task board. Focus on the work that matters most and let the robots do the rest.",
     "use-text":"No-code automation is built into every Task board. Focus on the work that matters most and let the robots do the rest.",
-    "copy":"2024 © Copyright Task Mangement System"
+    "copy":"2024 © Copyright Task Mangement System",
+    "dashboard" :"Dashboard",
+    "logout":"Logout"
 
     
 

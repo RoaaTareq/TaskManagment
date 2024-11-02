@@ -24,7 +24,7 @@ const Navbar = ({ brand, links, bgColor = 'light' }) => {
                                         {link.label}
                                     </button>
                                 ) : (
-                                    <Link className="nav-link" to={link.href}>
+                                    <Link className="nav-link navbar-margin" to={link.href}>
                                         {link.label}
                                     </Link>
                                 )}
