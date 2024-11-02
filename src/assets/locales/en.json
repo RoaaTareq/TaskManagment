@@ -44,9 +44,9 @@
      "low":"Low",
      "meduim":"Meduim",
      "startdate":"Start Date",
-     "enddate":"End Date",
-      "addtask":"Add task"  ,
-       "Msnagementtask":"Management Task"
+    "enddate":"End Date",
+    "addtask":"Add task"  ,
+    "Msnagementtask":"Management Task"
 
 
    
