@@ -6,26 +6,37 @@ import MainFooter from './views/Layout/MainFooter';
 import Register from './views/Auth/Register';
 import Login from './views/Auth/Login';
 import MainSidebar from './views/Dashboard/Layout/MainSidebar';
-import NotFound from './views/Error/NotFound'
-function App() {
-  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+import NotFound from './views/Error/NotFound';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import './i18n';
 
+function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-up" element={<Register />} />
-        <Route path="/sign-in" element={<Login />} />
-       
-        <Route
-          path="/dashboard/*"
-          element={loggedInUser ? <MainSidebar /> : <Navigate to="/dashboard" />}
-        />
-         <Route path="*" element={<NotFound />} /> 
-      </Routes>
-      <MainFooter />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-up" element={<Register />} />
+          <Route path="/sign-in" element={<Login />} />
+
+          {/* Protected Dashboard Route */}
+          <Route
+            path="/dashboard/*"
+            element={
+              <ProtectedRoute
+                element={<MainSidebar />}
+                redirectTo="/sign-in"
+              />
+            }
+          />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <MainFooter />
+      </Router>
+    </AuthProvider>
   );
 }
 
