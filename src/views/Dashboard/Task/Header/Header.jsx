@@ -71,7 +71,7 @@ const TaskHeader = () => {
     return (
         <section>
             <Container className="container">
-                <div className="d-flex justify-content-between mt-4 mb-4">
+                <div className="d-flex justify-content-between mt-4 mb-4 header-task">
                 <Heading level={1} text="Task Managment"  />
                     <Button className="create-task" onClick={toggleForm}>Add Task +</Button>
                 </div>

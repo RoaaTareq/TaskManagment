@@ -53,6 +53,9 @@ margin:0 12px;
   .custom-card {
     margin: 6px 0;
   }
+  .header-task{
+    flex-direction: column;
+  }
 }
 
 .custom-table th, .custom-table td {

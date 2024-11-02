@@ -19,8 +19,8 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
         <section>
             <Container>
                 <Row className='align-items-center'>
-                    <Col xs={6}>
-                        <div className="d-flex align-items-center mt-4 mb-4">
+                    <Col xl={6} md={12} xs={12}>
+                        <div className="d-flex align-items-center mt-4 mb-4 mobile-direction">
                             {['High', 'Medium', 'Low'].map(priority => (
                                 <Button 
                                     key={priority} 
@@ -45,7 +45,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                             </span>
                         </div>
                     </Col>
-                    <Col xs={3}>
+                    <Col xl={3} md={12} xs={12} >
                         <div className="d-flex align-items-center">
                             <label htmlFor="startDate" className='label-form'>Start Date:</label>
                             <Input
@@ -58,7 +58,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                             />
                         </div>
                     </Col>
-                    <Col xs={3}>
+                    <Col xl={3} md={12} xs={12}>
                         <div className='d-flex align-items-center'>
                             <label htmlFor="endDate" className='label-form'>End Date:</label>
                             <Input

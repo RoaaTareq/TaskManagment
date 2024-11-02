@@ -82,7 +82,7 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     });
 
     return (
-        <div ref={drop} className="col-3 board-layout">
+        <div ref={drop} className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 board-layout">
             <h5>{title} ({tasks.length})</h5> {/* Display count of tasks */}
             {tasks.map((task, index) => (
                 <Task
