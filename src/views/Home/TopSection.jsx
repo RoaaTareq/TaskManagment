@@ -6,7 +6,13 @@ import '../../assets/style/home.css';
 import Button from '../../components/Button/Button';
 import MainImage from '../../assets/video/ai-service-management-platform.png';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 const TopSection = () => {
+    const navigate = useNavigate();
+
+    const handleRegister = () => {
+        navigate('sign-up');
+    };
     const { t } = useTranslation();
     return (
         <section className='Main_section'>
@@ -18,7 +24,7 @@ const TopSection = () => {
                             text={t('maintext')} 
                             className="text-white" 
                         />
-                        <Button className='mt-4 mb-4 btn_registe'>
+                        <Button className='mt-4 mb-4 btn_registe' onClick={handleRegister} >
                            {t('registernow')}
                         </Button>
                     </Col>
