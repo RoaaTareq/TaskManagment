@@ -20,7 +20,7 @@ export async function initDB() {
     });
 }
 
-// ----- User Functions -----
+
 export async function addUser(user) {
     const db = await initDB();
     return db.add(USER_STORE_NAME, user);
@@ -35,7 +35,7 @@ export async function getUserByEmailAndPassword(email, password) {
 
 export const addTask = async (task) => {
     const db = await initDB();
-    // Assuming task object includes userId from localStorage
+  
     const userId = JSON.parse(localStorage.getItem('loggedInUser')).id;
     await db.add(TASK_STORE_NAME, { ...task, userId });
 };
