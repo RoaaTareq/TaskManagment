@@ -11,9 +11,9 @@ const TaskForm = ({ onSubmit, onCancel }) => {
     const formRef = useRef(null); // Reference to the form container
 
     const priorityOptions = [
-        { label: 'High', value: 'high' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'Low', value: 'low' },
+        { label: 'High', value: 'High' },
+        { label: 'Medium', value: 'Medium' },
+        { label: 'Low', value: 'Low' },
     ];
 
     // Yup validation schema

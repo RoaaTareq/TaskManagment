@@ -13,9 +13,9 @@ const Filter = ({ setFilterPriority, setStartDate, setEndDate, startDate, endDat
                 <div className='row align-items-center'>
                     <div className='col-6'>
                         <div className="d-flex align-items-center mt-4 mb-4">
-                            <Button className='filter-btn' onClick={() => handlePriorityChange('high')}>High</Button>
-                            <Button className='filter-btn' onClick={() => handlePriorityChange('medium')}>Medium</Button>
-                            <Button className='filter-btn' onClick={() => handlePriorityChange('low')}>Low</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('High')}>High</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('Medium')}>Medium</Button>
+                            <Button className='filter-btn' onClick={() => handlePriorityChange('Low')}>Low</Button>
                             <Button className='filter-btn' onClick={() => handlePriorityChange('')}>All</Button>
                         </div>
                     </div>

@@ -27,7 +27,7 @@
   .task-form{
     position: absolute;
       margin: auto;
-     
+     z-index: 99999;
    
       transform: translate(60%, 0%);
       display: flex;

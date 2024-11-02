@@ -7,7 +7,7 @@ import Task from '../Task/task';
 
 
 const menuItems = [
-  { label: 'Managemnt Task', link: 'task' },
+  { label: ' 📜 Managemnt Task', link: 'task' },
 ]
 
 function MainSidebar() {

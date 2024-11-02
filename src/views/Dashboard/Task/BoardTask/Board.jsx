@@ -19,16 +19,16 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
         }),
     });
 
-    const getBackgroundColor = (priority) => {
-        switch (priority) {
-            case 'high':
-                return '#f0a4a4';
-            case 'medium':
-                return 'orange';
-            case 'low':
-                return '#cdf0cd';
+    const getBackgroundColor = (columnId) => {
+        switch (columnId) {
+            case 'todo':
+                return '#bd0808'; 
+            case 'inProgress':
+                return 'orange'; 
+            case 'done':
+                return '#0d420d'; 
             default:
-                return 'white';
+                return 'white'; 
         }
     };
 
@@ -40,14 +40,15 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
             className='drag-card'
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                backgroundColor: isOverdue ? '#ffcccb' : getBackgroundColor(task.priority),
+                backgroundColor: isOverdue ? '#ffcccb' : getBackgroundColor(columnId),
                 padding: '10px',
                 borderRadius: '5px',
                 marginBottom: '10px',
-                position: 'relative' // Added to position the line
+                position: 'relative',
+                color:'#FFF'
             }}
         >
-            {columnId === 'done' && isOverdue && ( // Line for overdue tasks
+            {columnId === 'done' && isOverdue && (
                 <div style={{
                     position: 'absolute',
                     top: 0,
@@ -63,15 +64,16 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className='d-flex flex-column'>
-                    <span>{task.priority}</span>
-                    <p>{task.description}</p>
-                    <span>{task.startDate} to {task.endDate}</span>
-                    {isOverdue && <span style={{ color: 'red' }}>Overdue!</span>}
+                    <span>🚒{task.priority}</span>
+                    <p>🧾{task.description}</p>
+                    <span> 📅{task.startDate} to {task.endDate}</span>
+                   
                 </div>
             </div>
         </div>
     );
 };
+
 
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
@@ -178,7 +180,7 @@ const Board = ({ tasks, setTasks }) => {
                     <div className="container">
                         <div className="row m-auto justify-content-between mt-4">
                             <Column
-                                title="To Do"
+                                title=" 🪜 To Do"
                                 tasks={filteredTasks(tasks.todo, "todo")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="todo"
@@ -186,7 +188,7 @@ const Board = ({ tasks, setTasks }) => {
                                 onEdit={editTask}
                             />
                             <Column
-                                title="In Progress"
+                                title=" ⚒️ In Progress"
                                 tasks={filteredTasks(tasks.inProgress, "inProgress")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="inProgress"
@@ -194,7 +196,7 @@ const Board = ({ tasks, setTasks }) => {
                                 onEdit={editTask}
                             />
                             <Column
-                                title="Done"
+                                title=" ✅ Done"
                                 tasks={filteredTasks(tasks.done, "done")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="done"
