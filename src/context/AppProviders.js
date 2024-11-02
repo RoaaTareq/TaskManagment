@@ -1,4 +1,3 @@
-// src/context/AppProviders.js
 import React from 'react';
 import { AuthProvider } from './AuthContext';
 import { LanguageProvider } from './LanguageContext';
