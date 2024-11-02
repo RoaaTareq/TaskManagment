@@ -5,12 +5,14 @@ import { deleteTaskFromDB } from '../../../../db';
 import Filter from '../FilterandSorting/Filter';
 import EditTaskForm from '../Models/EditTaskForm';
 import '../../../../assets/style/dragboard.css';
+import { useTranslation } from 'react-i18next';
 
 const ItemTypes = {
     TASK: 'task',
 };
 
 const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
+    const { t } = useTranslation();
     const [{ isDragging }, drag] = useDrag({
         type: ItemTypes.TASK,
         item: { index, columnId },
@@ -59,14 +61,16 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
                 }} />
             )}
             <div className="task-actions d-flex justify-content-end">
-                <i className="bi bi-pen icon" onClick={() => onEdit(task)}  title="Edit Task" />
-                <i className="bi bi-trash icon" onClick={() => onDelete(task, columnId)}  title="Delete Task" />
+                <i className="bi bi-pen icon" onClick={() => onEdit(task)} title={t('edit_task')} />
+                <i className="bi bi-trash icon" onClick={() => onDelete(task, columnId)} title={t('delete_task')} />
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className='d-flex flex-column'>
                     <span className='priority'>🚒 {task.priority}</span>
                     <p className='text-descrption'>🧾 {task.description}</p>
-                    <span> 📅 {task.startDate} to {task.endDate}</span>
+                    {task.startDate && task.endDate && (
+                        <span> 📅 {task.startDate} to {task.endDate}</span>
+                    )}
                 </div>
             </div>
         </div>
@@ -100,6 +104,7 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
 };
 
 const Board = ({ tasks, setTasks ,onUpdateTask }) => {
+    const { t } = useTranslation();
     const [filterPriority, setFilterPriority] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -107,6 +112,8 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
     const [currentTask, setCurrentTask] = useState(null);
 
     const moveTask = (fromIndex, toColumnId, fromColumnId) => {
+        if (fromColumnId === toColumnId) return; // Prevent moving within the same column
+
         const sourceTasks = Array.from(tasks[fromColumnId]);
         const [movedTask] = sourceTasks.splice(fromIndex, 1);
         const destinationTasks = Array.from(tasks[toColumnId]);
@@ -120,21 +127,19 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
     };
 
     const deleteTask = async (task, columnId) => {
-        const userId = JSON.parse(localStorage.getItem('loggedInUser')).id; // Get the userId from local storage
-    
-        // Check if the task belongs to the current user
+        const userId = JSON.parse(localStorage.getItem('loggedInUser')).id;
+
         if (task.userId !== userId) {
             console.error("User ID does not match. Cannot delete task.");
             return;
         }
-    
-        await deleteTaskFromDB(task.id); // Delete from IndexedDB
+
+        await deleteTaskFromDB(task.id);
         setTasks((prevTasks) => ({
             ...prevTasks,
-            [columnId]: prevTasks[columnId].filter((t) => t.id !== task.id), // Remove from UI state
+            [columnId]: prevTasks[columnId].filter((t) => t.id !== task.id),
         }));
     };
-    
 
     const editTask = (task) => {
         setCurrentTask(task);
@@ -146,26 +151,24 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
             console.error("No valid task selected for editing");
             return;
         }
-    
+
         setTasks((prevTasks) => {
             const currentColumnTasks = prevTasks[currentTask.columnId] || [];
             const updatedTasks = currentColumnTasks.map((task) =>
                 task.id === currentTask.id ? { ...task, ...updatedTask } : task
             );
-    
+
             return {
                 ...prevTasks,
                 [currentTask.columnId]: updatedTasks,
             };
         });
-        
-        // Ensure that this line is awaited
+
         await onUpdateTask({ ...updatedTask, id: currentTask.id, columnId: currentTask.columnId });
-        
         setIsEditing(false);
         setCurrentTask(null);
     };
-    
+
     const filteredTasks = (columnTasks, columnId) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
@@ -192,7 +195,7 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
                     <div className="container">
                         <div className="row m-auto justify-content-between mt-4">
                             <Column
-                                title=" 🪜 To Do"
+                                title={`🪜 ${t('todo')}`} 
                                 tasks={filteredTasks(tasks.todo, "todo")}
                                 moveTask={moveTask}
                                 columnId="todo"
@@ -200,7 +203,7 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
                                 onEdit={editTask}
                             />
                             <Column
-                                title=" ⚒️ In Progress"
+                                title={`⚒️ ${t('progress')}`}
                                 tasks={filteredTasks(tasks.inProgress, "inProgress")}
                                 moveTask={moveTask}
                                 columnId="inProgress"
@@ -208,7 +211,7 @@ const Board = ({ tasks, setTasks ,onUpdateTask }) => {
                                 onEdit={editTask}
                             />
                             <Column
-                                title=" ✅ Done"
+                                title={`✅ ${t('done')}`}
                                 tasks={filteredTasks(tasks.done, "done")}
                                 moveTask={moveTask}
                                 columnId="done"

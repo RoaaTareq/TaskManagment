@@ -51,7 +51,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                     </Col>
                     <Col xl={3} md={12} xs={12} >
                         <div className="d-flex align-items-center">
-                            <label htmlFor="startDate" className='label-form'>{t('start_date')}:</label>
+                            <label htmlFor="startDate" className='label-form'>{t('startdate')}:</label>
                             <Input
                                 type="date"
                                 name="startDate"
@@ -64,7 +64,7 @@ const Filter = React.memo(({ setFilterPriority, setStartDate, setEndDate, startD
                     </Col>
                     <Col xl={3} md={12} xs={12}>
                         <div className='d-flex align-items-center'>
-                            <label htmlFor="endDate" className='label-form'>{t('end_date')}:</label>
+                            <label htmlFor="endDate" className='label-form'>{t('enddate')}:</label>
                             <Input
                                 type="date"
                                 name="endDate"
