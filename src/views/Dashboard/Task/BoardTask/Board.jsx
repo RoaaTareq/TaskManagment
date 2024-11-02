@@ -10,7 +10,6 @@ const ItemTypes = {
     TASK: 'task',
 };
 
-// Task component for individual tasks
 const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
     const [{ isDragging }, drag] = useDrag({
         type: ItemTypes.TASK,
@@ -20,19 +19,20 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
         }),
     });
 
-    // Determine background color based on task priority
     const getBackgroundColor = (priority) => {
         switch (priority) {
             case 'high':
-                return '#f0a4a4'; // High priority - red
+                return '#f0a4a4';
             case 'medium':
-                return 'orange'; // Medium priority - orange
+                return 'orange';
             case 'low':
-                return '#cdf0cd'; // Low priority - green
+                return '#cdf0cd';
             default:
-                return 'white'; // Default background color
+                return 'white';
         }
     };
+
+    const isOverdue = new Date(task.dueDate) < new Date();
 
     return (
         <div
@@ -40,12 +40,23 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
             className='drag-card'
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                backgroundColor: getBackgroundColor(task.priority), // Apply the background color
-                padding: '10px', // Add some padding for better appearance
-                borderRadius: '5px', // Optional: Add some border radius
-                marginBottom: '10px' // Space between cards
+                backgroundColor: isOverdue ? '#ffcccb' : getBackgroundColor(task.priority),
+                padding: '10px',
+                borderRadius: '5px',
+                marginBottom: '10px',
+                position: 'relative' // Added to position the line
             }}
         >
+            {columnId === 'done' && isOverdue && ( // Line for overdue tasks
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    backgroundColor: 'red'
+                }} />
+            )}
             <div className="task-actions d-flex justify-content-end">
                 <i className="bi bi-pen" onClick={() => onEdit(task)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Edit Task" />
                 <i className="bi bi-trash" onClick={() => onDelete(task, columnId)} style={{ cursor: 'pointer', margin: '0 5px' }} title="Delete Task" />
@@ -55,12 +66,12 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
                     <span>{task.priority}</span>
                     <p>{task.description}</p>
                     <span>{task.startDate} to {task.endDate}</span>
+                    {isOverdue && <span style={{ color: 'red' }}>Overdue!</span>}
                 </div>
             </div>
         </div>
     );
 };
-
 
 const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
     const [, drop] = useDrop({
@@ -72,7 +83,7 @@ const Column = ({ title, tasks, moveTask, columnId, onDelete, onEdit }) => {
 
     return (
         <div ref={drop} className="col-3 board-layout">
-            <h5>{title}</h5>
+            <h5>{title} ({tasks.length})</h5> {/* Display count of tasks */}
             {tasks.map((task, index) => (
                 <Task
                     key={task.id}
@@ -124,10 +135,9 @@ const Board = ({ tasks, setTasks }) => {
     const handleEditSubmit = (updatedTask) => {
         if (!currentTask) {
             console.error("No valid task selected for editing");
-            return; // Early return if there's no current task
+            return;
         }
 
-        // Updating task in state
         setTasks((prevTasks) => {
             const currentColumnTasks = prevTasks[currentTask.columnId] || [];
             const updatedTasks = currentColumnTasks.map((task) =>
@@ -140,18 +150,19 @@ const Board = ({ tasks, setTasks }) => {
             };
         });
 
-        // Reset state after submission
         setIsEditing(false);
         setCurrentTask(null);
     };
 
-    const filteredTasks = (columnTasks) => {
+    const filteredTasks = (columnTasks, columnId) => {
         return columnTasks.filter(task => {
             const matchesPriority = filterPriority ? task.priority === filterPriority : true;
-            const taskDate = new Date(task.date);
+            const taskDate = new Date(task.dueDate);
             const matchesDate = (startDate ? taskDate >= new Date(startDate) : true) &&
                                 (endDate ? taskDate <= new Date(endDate) : true);
-            return matchesPriority && matchesDate;
+            const isOverdue = taskDate < new Date();
+
+            return matchesPriority && matchesDate && (columnId === 'done' || !isOverdue);
         });
     };
 
@@ -168,7 +179,7 @@ const Board = ({ tasks, setTasks }) => {
                         <div className="row m-auto justify-content-between mt-4">
                             <Column
                                 title="To Do"
-                                tasks={filteredTasks(tasks.todo)}
+                                tasks={filteredTasks(tasks.todo, "todo")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="todo"
                                 onDelete={deleteTask}
@@ -176,7 +187,7 @@ const Board = ({ tasks, setTasks }) => {
                             />
                             <Column
                                 title="In Progress"
-                                tasks={filteredTasks(tasks.inProgress)}
+                                tasks={filteredTasks(tasks.inProgress, "inProgress")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="inProgress"
                                 onDelete={deleteTask}
@@ -184,7 +195,7 @@ const Board = ({ tasks, setTasks }) => {
                             />
                             <Column
                                 title="Done"
-                                tasks={filteredTasks(tasks.done)}
+                                tasks={filteredTasks(tasks.done, "done")} // Pass columnId here
                                 moveTask={moveTask}
                                 columnId="done"
                                 onDelete={deleteTask}
