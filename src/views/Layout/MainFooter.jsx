@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../../components/Layout/Footer'; 
+import Footer from '../../components/Layout/footer'; 
 import { useTranslation } from 'react-i18next';
 const MainFooter = () => {
     const { t } = useTranslation();
