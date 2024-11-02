@@ -64,8 +64,8 @@ const Task = ({ task, index, moveTask, columnId, onDelete, onEdit }) => {
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className='d-flex flex-column'>
-                    <span>🚒 {task.priority}</span>
-                    <p>🧾 {task.description}</p>
+                    <span className='priority'>🚒 {task.priority}</span>
+                    <p className='text-descrption'>🧾 {task.description}</p>
                     <span> 📅 {task.startDate} to {task.endDate}</span>
                 </div>
             </div>
